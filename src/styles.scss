@@ -28,3 +28,20 @@ body {
 
   --primary: #38bdf8;          /* accent / buttons */
 }
+.aurora {
+  position: absolute;
+  inset: -50%;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(56,189,248,0.35), transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(37,99,235,0.35), transparent 40%),
+    radial-gradient(circle at 50% 50%, rgba(99,102,241,0.25), transparent 45%);
+  animation: auroraMove 18s linear infinite;
+  filter: blur(80px);
+  z-index: 0;
+}
+
+@keyframes auroraMove {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  50% { transform: translate(-8%, -6%) rotate(180deg); }
+  100% { transform: translate(0, 0) rotate(360deg); }
+}
