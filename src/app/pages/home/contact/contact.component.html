@@ -1,0 +1,35 @@
+<section id="contact" class="contact">
+<h2>Contact</h2>
+
+
+<p class="intro">
+Interested in collaborating, discussing opportunities, or building impactful products.
+</p>
+
+
+<div class="contact-grid">
+<div class="contact-item">
+<span>Email</span>
+<a href="mailto:{{ email }}">{{ email }}</a>
+</div>
+
+
+<div class="contact-item">
+<span>Phone</span>
+<a href="tel:{{ phone }}">{{ phone }}</a>
+</div>
+
+
+<div class="contact-item">
+<span>Location</span>
+<p>{{ location }}</p>
+</div>
+</div>
+
+
+<div class="links">
+<a *ngFor="let link of links" [href]="link.url" target="_blank">
+{{ link.label }}
+</a>
+</div>
+</section>

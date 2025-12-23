@@ -1,0 +1,16 @@
+<section id="ai" class="ai">
+<h2>AI & LLM Experience</h2>
+
+
+<div class="cards">
+<article class="ai-card" *ngFor="let item of useCases">
+<h3>{{ item.title }}</h3>
+<p>{{ item.description }}</p>
+
+
+<div class="tags">
+<span *ngFor="let t of item.tech">{{ t }}</span>
+</div>
+</article>
+</div>
+</section>

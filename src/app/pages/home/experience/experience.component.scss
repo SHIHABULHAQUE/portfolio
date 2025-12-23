@@ -1,0 +1,113 @@
+.experience {
+  background: var(--page-bg);
+  padding: 6rem 2.5rem;
+}
+
+/* Section title */
+.experience h2 {
+  font-size: 2.6rem;
+  margin-bottom: 4rem;
+  color: var(--text-primary);
+}
+
+/* Timeline container */
+.timeline {
+  display: grid;
+  gap: 3rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Experience card */
+.experience-card {
+  background: var(--card-bg);
+  color: var(--text-primary);
+  padding: 2.5rem 2.8rem;
+  border-radius: 22px;
+  position: relative;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+/* Soft hover lift (premium feel) */
+.experience-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 35px 80px rgba(0, 0, 0, 0.35);
+}
+
+/* Header */
+.experience-card header {
+  margin-bottom: 1.8rem;
+}
+
+.experience-card h3 {
+  font-size: 1.45rem;
+  margin-bottom: 0.4rem;
+  color: var(--text-primary);
+}
+
+/* Meta row */
+.meta {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.company {
+  font-weight: 500;
+}
+
+/* Period */
+.period {
+  display: inline-block;
+  margin-top: 0.6rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+/* Description list */
+.experience-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Bullet points */
+.experience-card li {
+  position: relative;
+  padding-left: 1.6rem;
+  margin-bottom: 0.9rem;
+  line-height: 1.7;
+  color: var(--text-primary);
+}
+
+/* Custom bullet */
+.experience-card li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.6rem;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--primary);
+}
+
+/* Dark-mode subtle border */
+.dark-theme .experience-card {
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .experience {
+    padding: 4.5rem 1.5rem;
+  }
+
+  .experience h2 {
+    font-size: 2.2rem;
+  }
+
+  .experience-card {
+    padding: 2rem;
+  }
+}

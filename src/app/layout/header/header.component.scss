@@ -1,0 +1,52 @@
+.header {
+position: sticky;
+top: 0;
+z-index: 1000;
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 1rem 2.5rem;
+background: var(--bg-color);
+backdrop-filter: blur(10px);
+border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+
+.logo {
+font-weight: 700;
+font-size: 1.3rem;
+color: var(--primary);
+}
+
+
+.nav a {
+margin: 0 1rem;
+text-decoration: none;
+color: var(--text-color);
+position: relative;
+
+
+&::after {
+content: '';
+position: absolute;
+bottom: -5px;
+left: 0;
+width: 0;
+height: 2px;
+background: var(--primary);
+transition: width 0.3s ease;
+}
+
+
+&:hover::after {
+width: 100%;
+}
+}
+
+
+.theme-btn {
+background: transparent;
+border: none;
+font-size: 1.2rem;
+cursor: pointer;
+}

@@ -1,0 +1,98 @@
+.education {
+  background: var(--page-bg);
+  padding: 6rem 2.5rem;
+}
+
+/* Section title */
+.education h2 {
+  font-size: 2.6rem;
+  margin-bottom: 4rem;
+  color: var(--text-primary);
+}
+
+/* Education grid */
+.education-grid {
+  max-width: 1100px;
+  margin: 0 auto 4rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2.5rem;
+}
+
+/* Education card */
+.education-card {
+  background: var(--card-bg);
+  color: var(--text-primary);
+  padding: 2.2rem;
+  border-radius: 22px;
+  box-shadow: 0 22px 55px rgba(0, 0, 0, 0.25);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+/* Hover lift */
+.education-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 35px 80px rgba(0, 0, 0, 0.35);
+}
+
+/* Degree title */
+.education-card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.6rem;
+  color: var(--text-primary);
+}
+
+/* Institute */
+.education-card p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+/* Certifications */
+.certifications {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.certifications h3 {
+  font-size: 1.6rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+}
+
+/* Certification list */
+.cert-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+/* Certification badge */
+.cert-list span {
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  background: rgba(37, 99, 235, 0.15);
+  color: var(--primary);
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+/* Dark-mode border polish */
+.dark-theme .education-card {
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .education {
+    padding: 4.5rem 1.5rem;
+  }
+
+  .education h2 {
+    font-size: 2.2rem;
+  }
+
+  .certifications h3 {
+    font-size: 1.4rem;
+  }
+}

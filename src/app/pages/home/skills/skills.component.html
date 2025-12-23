@@ -1,0 +1,22 @@
+<section id="skills" class="skills">
+<h2>Skills</h2>
+
+
+<div class="grid">
+<article class="skill-card" *ngFor="let group of groups">
+<h3>{{ group.title }}</h3>
+
+
+<ul>
+<li *ngFor="let skill of group.skills">
+<span class="name">{{ skill.name }}</span>
+<span class="level" [class.expert]="skill.level === 'Expert'"
+[class.advanced]="skill.level === 'Advanced'"
+[class.intermediate]="skill.level === 'Intermediate'">
+{{ skill.level }}
+</span>
+</li>
+</ul>
+</article>
+</div>
+</section>

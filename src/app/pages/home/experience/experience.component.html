@@ -1,0 +1,27 @@
+<section id="experience" class="experience">
+<h2>Professional Experience</h2>
+
+
+<div class="timeline">
+<article
+class="experience-card"
+*ngFor="let exp of experiences"
+>
+<header>
+<h3>{{ exp.role }}</h3>
+<div class="meta">
+<span class="company">{{ exp.company }}</span>
+<span *ngIf="exp.location">• {{ exp.location }}</span>
+</div>
+<span class="period">{{ exp.period }}</span>
+</header>
+
+
+<ul>
+<li *ngFor="let item of exp.description">
+{{ item }}
+</li>
+</ul>
+</article>
+</div>
+</section>

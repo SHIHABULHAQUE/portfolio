@@ -1,1 +1,30 @@
-/* You can add global styles to this file, and also import other style files */
+/* Global body styles */
+body {
+  background-color: var(--page-bg);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* =====================
+   LIGHT THEME
+===================== */
+.light-theme {
+  --page-bg: #f8fafc;          /* page background */
+  --card-bg: #ffffff;          /* cards */
+  --text-primary: #0f172a;     /* main text */
+  --text-secondary: #475569;   /* muted text */
+
+  --primary: #2563eb;          /* accent / buttons */
+}
+
+/* =====================
+   DARK THEME
+===================== */
+.dark-theme {
+  --page-bg: #020617;          /* page background */
+  --card-bg: #0f172a;          /* cards */
+  --text-primary: #e5e7eb;     /* main text */
+  --text-secondary: #94a3b8;   /* muted text */
+
+  --primary: #38bdf8;          /* accent / buttons */
+}

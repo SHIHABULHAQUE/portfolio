@@ -1,0 +1,18 @@
+@import './variables';
+@import './themes';
+@import './animations';
+
+
+* {
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+}
+
+
+body {
+font-family: var(--font-primary);
+background: var(--bg-color);
+color: var(--text-color);
+transition: background var(--transition-fast), color var(--transition-fast);
+}
