@@ -1,0 +1,1 @@
+body{background-color:var(--page-bg);color:var(--text-primary);transition:background-color .3s ease,color .3s ease}.light-theme{--page-bg: #f8fafc;--card-bg: #ffffff;--text-primary: #0f172a;--text-secondary: #475569;--primary: #2563eb}.dark-theme{--page-bg: #020617;--card-bg: #0f172a;--text-primary: #e5e7eb;--text-secondary: #94a3b8;--primary: #38bdf8}
