@@ -1,10 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-interface Education {
-  degree: string;
-  institute: string;
-}
+import { RESUME_DATA } from '../../../core/data/resume.data';
 
 @Component({
   selector: 'app-education',
@@ -14,20 +10,5 @@ interface Education {
   styleUrls: ['./education.component.scss']
 })
 export class EducationComponent {
-  education: Education[] = [
-    {
-      degree: 'Bachelor of Computer Applications (BCA)',
-      institute: 'MES KVM College'
-    },
-    {
-      degree: 'Higher Secondary – Computer Science',
-      institute: 'GHSS'
-    },
-    {
-      degree: 'High School',
-      institute: 'Majilis HSS Vengad'
-    }
-  ];
-
-  certifications: string[] = ['Angular', 'React.js', '.NET'];
+  education = RESUME_DATA.education;
 }

@@ -1,85 +1,101 @@
-.projects {
-  background: var(--page-bg);
-  padding: 6rem 2.5rem;
-}
-
-/* Section title */
-.projects h2 {
-  font-size: 2.6rem;
-  margin-bottom: 4rem;
-  color: var(--text-primary);
-}
-
-/* Grid layout */
-.projects-grid {
-  max-width: 1100px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2.5rem;
-}
-
-/* Project card */
-.project-card {
-  background: var(--card-bg);
-  color: var(--text-primary);
-  padding: 2.4rem 2.6rem;
-  border-radius: 22px;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
+.projects-section {
   position: relative;
 }
 
-/* Hover lift */
-.project-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 35px 80px rgba(0, 0, 0, 0.35);
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
 }
 
-/* Title */
-.project-card h3 {
-  font-size: 1.3rem;
-  margin-bottom: 0.8rem;
-  color: var(--text-primary);
+.project-card {
+  background-color: var(--bg-card);
+  border-radius: 4px;
+  padding: 1.75rem;
+  transition: var(--transition-fast);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid transparent;
+  /* Prepare for border transition if needed, or leave transparent */
+  box-shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
+
+  &:hover {
+    transform: translateY(-5px);
+    background-color: var(--bg-card-hover);
+
+    .project-title {
+      color: var(--primary);
+    }
+
+    .folder-icon svg {
+      color: var(--primary);
+    }
+  }
 }
 
-/* Description */
-.project-card p {
-  line-height: 1.7;
-  opacity: 0.9;
-  margin-bottom: 1.6rem;
-  color: var(--text-primary);
+.card-visual {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
 }
 
-/* Tech stack */
-.tech {
+.folder-icon {
+  color: var(--primary);
+
+  svg {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.external-link {
+  a {
+    color: var(--text-muted);
+    transition: var(--transition-fast);
+
+    &:hover {
+      color: var(--primary);
+    }
+  }
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.project-title {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--text-main);
+  transition: var(--transition-fast);
+}
+
+.project-desc {
+  font-family: var(--font-body);
+  color: var(--text-muted);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  flex-grow: 1;
+}
+
+.tech-stack {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.7rem;
+  gap: 0.75rem;
+  margin-top: auto;
+  /* Push to bottom */
 }
 
-/* Tech badge */
-.tech span {
-  font-size: 0.75rem;
-  padding: 0.35rem 0.8rem;
-  border-radius: 999px;
-  background: rgba(37, 99, 235, 0.15);
-  color: var(--primary);
-  font-weight: 500;
-}
-
-/* Dark-mode border polish */
-.dark-theme .project-card {
-  border: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .projects {
-    padding: 4.5rem 1.5rem;
-  }
-
-  .projects h2 {
-    font-size: 2.2rem;
-  }
+.tech-pill {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.8rem;
+  color: var(--text-muted);
 }

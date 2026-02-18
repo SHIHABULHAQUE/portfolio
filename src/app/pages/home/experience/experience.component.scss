@@ -1,113 +1,122 @@
-.experience {
-  background: var(--page-bg);
-  padding: 6rem 2.5rem;
-}
-
-/* Section title */
-.experience h2 {
-  font-size: 2.6rem;
-  margin-bottom: 4rem;
-  color: var(--text-primary);
-}
-
-/* Timeline container */
-.timeline {
-  display: grid;
-  gap: 3rem;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-/* Experience card */
-.experience-card {
-  background: var(--card-bg);
-  color: var(--text-primary);
-  padding: 2.5rem 2.8rem;
-  border-radius: 22px;
+.experience-section {
   position: relative;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 
-/* Soft hover lift (premium feel) */
-.experience-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 35px 80px rgba(0, 0, 0, 0.35);
+.section-title {
+  text-align: center;
+  margin-bottom: 4rem;
+  font-size: 2.5rem;
+  background: linear-gradient(to right, var(--text-main), var(--text-muted));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-/* Header */
-.experience-card header {
-  margin-bottom: 1.8rem;
+.timeline {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  padding-left: 2rem;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 2px;
+    background: var(--border);
+  }
 }
 
-.experience-card h3 {
-  font-size: 1.45rem;
-  margin-bottom: 0.4rem;
-  color: var(--text-primary);
+.timeline-item {
+  position: relative;
+  margin-bottom: 3rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
-/* Meta row */
-.meta {
-  font-size: 0.95rem;
-  color: var(--text-secondary);
+.timeline-dot {
+  position: absolute;
+  left: -2rem;
+  top: 0.5rem;
+  width: 1rem; // Total width taking adjust for center
+  height: 1rem;
+  // Actually centering it on the line
+  margin-left: -5px; // (2px line / 2) - (12px dot / 2) -> -5px
+  width: 12px;
+  height: 12px;
+  background: var(--primary);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+  z-index: 1;
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 2rem;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary);
+  }
+}
+
+.job-header {
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 1rem;
+}
+
+.role {
+  color: var(--primary);
+  font-size: 1.25rem;
+  margin-bottom: 0.25rem;
 }
 
 .company {
-  font-weight: 500;
+  display: block;
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
 }
 
-/* Period */
-.period {
+.period,
+.location {
   display: inline-block;
-  margin-top: 0.6rem;
-  font-size: 0.85rem;
-  color: var(--text-secondary);
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-right: 1rem;
+
+  &::before {
+    content: '• ';
+  }
+
+  &:first-of-type::before {
+    content: '';
+  }
 }
 
-/* Description list */
-.experience-card ul {
-  list-style: none;
+.job-description {
+  list-style-type: none;
   padding: 0;
-  margin: 0;
-}
 
-/* Bullet points */
-.experience-card li {
-  position: relative;
-  padding-left: 1.6rem;
-  margin-bottom: 0.9rem;
-  line-height: 1.7;
-  color: var(--text-primary);
-}
+  li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-secondary);
 
-/* Custom bullet */
-.experience-card li::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0.6rem;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--primary);
-}
-
-/* Dark-mode subtle border */
-.dark-theme .experience-card {
-  border: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .experience {
-    padding: 4.5rem 1.5rem;
-  }
-
-  .experience h2 {
-    font-size: 2.2rem;
-  }
-
-  .experience-card {
-    padding: 2rem;
+    &::before {
+      content: '▹';
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+    }
   }
 }

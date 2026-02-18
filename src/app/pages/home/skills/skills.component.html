@@ -1,22 +1,17 @@
-<section id="skills" class="skills">
-<h2>Skills</h2>
+<section class="section skills-section" id="skills">
+    <div class="container">
+        <div class="section-header centered">
+            <span class="section-subtitle bracket-text">Expertise</span>
+            <h2 class="section-title">Skills & Technologies</h2>
+        </div>
 
-
-<div class="grid">
-<article class="skill-card" *ngFor="let group of groups">
-<h3>{{ group.title }}</h3>
-
-
-<ul>
-<li *ngFor="let skill of group.skills">
-<span class="name">{{ skill.name }}</span>
-<span class="level" [class.expert]="skill.level === 'Expert'"
-[class.advanced]="skill.level === 'Advanced'"
-[class.intermediate]="skill.level === 'Intermediate'">
-{{ skill.level }}
-</span>
-</li>
-</ul>
-</article>
-</div>
+        <div class="skills-grid">
+            <div class="skill-card" *ngFor="let skill of skills">
+                <div class="icon-wrapper">
+                    <span class="tech-icon">{{ skill.charAt(0) }}</span>
+                </div>
+                <span class="skill-name">{{ skill }}</span>
+            </div>
+        </div>
+    </div>
 </section>

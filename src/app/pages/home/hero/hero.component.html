@@ -1,42 +1,50 @@
-<section class="hero" id="home">
-  <div class="hero-bg"></div>
-  <div class="aurora"></div>
-
-  <div class="blob blob-1"></div>
-  <div class="blob blob-2"></div>
-  <div class="blob blob-3"></div>
-
-  <div class="hero-content">
-    <div class="text reveal">
-      <h1 class="title">
-        Senior Software Engineer <br />
-        <span class="gradient-text">Angular Specialist</span>
-      </h1>
-
-      <p class="subtitle">
-        5.5+ years building enterprise-grade Angular applications,
-        leading teams, and integrating AI-driven solutions.
-      </p>
-
-      <div class="cta">
-        <a class="btn primary magnetic" href="../../../../assets/resume.pdf" target="_blank">
-          Download Resume
-        </a>
-        <a class="btn magnetic" href="https://github.com/" target="_blank">
-          GitHub
-        </a>
+<section class="hero-section" id="hero">
+  <div class="container hero-content">
+    <div class="text-content">
+      <div class="greeting-wrapper">
+        <span class="greeting-symbol">></span>
+        <span class="greeting-text">Start</span>
       </div>
 
-      <div class="tech-icons">
-        <img src="assets/icons/angular.svg" />
-        <img src="assets/icons/typescript.svg" />
-        <img src="assets/icons/dotnet.svg" />
-        <img src="assets/icons/ai.svg" />
+      <h1 class="name">{{ data.name }}</h1>
+      <h2 class="role">{{ data.role }}</h2>
+      <p class="summary">{{ data.summary }}</p>
+
+      <div class="cta-group">
+        <a href="/resume.pdf" target="_blank" class="btn btn-primary-outline">
+          Download Resume
+        </a>
+        <a href="#contact" class="btn btn-link">
+          Contact Me
+        </a>
       </div>
     </div>
 
-    <div class="image tilt">
-      <img src="assets/images/profile.jpeg" alt="Shihab profile" />
+    <div class="visual-content">
+      <div class="code-window-container">
+        <div class="code-window">
+          <div class="window-header">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+            <span class="window-title">developer.ts</span>
+          </div>
+          <div class="window-body">
+            <div class="code-line"><span class="keyword">const</span> <span class="var">developer</span> <span
+                class="op">=</span> <span class="brace">{{ '{' }}</span></div>
+            <div class="code-line indent"> name: <span class="string">'{{ data.name }}'</span>,</div>
+            <div class="code-line indent"> role: <span class="string">'{{ data.role }}'</span>,</div>
+            <div class="code-line indent"> skills: <span class="bracket">[</span></div>
+            <div class="code-line double-indent"> <span class="string">'Angular'</span>, <span
+                class="string">'.NET'</span>, <span class="string">'SQL'</span></div>
+            <div class="code-line indent"> <span class="bracket">]</span>,</div>
+            <div class="code-line indent"> hardWorker: <span class="bool">true</span>,</div>
+            <div class="code-line indent"> problemSolver: <span class="bool">true</span></div>
+            <div class="code-line"><span class="brace">{{ '}' }}</span>;</div>
+          </div>
+        </div>
+        <div class="glow-bg"></div>
+      </div>
     </div>
   </div>
 </section>
