@@ -7,8 +7,8 @@ export const RESUME_DATA = {
         location: 'Pattambi, India 679303',
         summary: 'Strategic Lead with 5.6 years of experience specializing in architecting scalable front-end solutions and leading high-performing Agile teams. Expert in Angular (v2–18) and modern JavaScript ecosystems, with a proven ability to translate complex business objectives into robust technical roadmaps. Focused on optimizing product functionality and mentoring cross-functional teams to deliver enterprise-grade software that prioritizes user experience and system performance.',
         social: {
-            linkedin: '', // To be filled if available, otherwise generic or hidden
-            github: ''
+            linkedin: 'https://www.linkedin.com/in/mohammed-shihabul-haque/',
+            github: 'https://github.com/SHIHABULHAQUE'
         }
     },
     experience: [
@@ -74,19 +74,13 @@ export const RESUME_DATA = {
             degree: 'Bachelor of Computer Application (BCA)',
             field: 'Computer Science',
             institution: 'MES KVM College, Valanchery',
-            year: ''
+            year: '2020'
         },
         {
             degree: 'Higher Secondary Education',
             field: 'Computer Science',
             institution: 'GHSS - Pattambi',
-            year: ''
-        },
-        {
-            degree: 'High School',
-            field: '',
-            institution: 'Majilis HSS Vengad - Valanchery',
-            year: ''
+            year: '2017'
         }
     ],
     skills: [
@@ -100,36 +94,60 @@ export const RESUME_DATA = {
         {
             title: 'ERP Application: Finance & Trading',
             description: 'A comprehensive Enterprise Resource Planning system for finance management, featuring real-time trading modules, detailed reporting, and automated reconciliation processes.',
+            challenge: 'Standardizing heterogeneous trading procedures and account books across distributed business networks, which led to synchronization bottlenecks.',
+            solution: 'Designed a centralized enterprise web platform in Angular 15, integrated with an asynchronous .NET queue processor and partitioned SQL Server database tables.',
+            impact: 'Reduced database load times by 40% and automated accounting reconciliations for 100K+ transaction runs.',
+            architecture: 'Layered Micro-frontend structure with distributed NgRx store caches.',
             technologies: ['Angular 15', '.NET Core', 'SQL Server', 'NgRx'],
             link: '#'
         },
         {
             title: 'Third-Party Integrations',
             description: 'Seamless integration modules for Insurance, SIP, and PAN verification services, enhancing the core banking platform with external service capabilities.',
+            challenge: 'Integrating external services like SIP, Insurance, and PAN verification APIs which had erratic latency spikes and inconsistent schemas.',
+            solution: 'Architected a resilient gateway middleware with retry policies, token storage, and local cache policies.',
+            impact: 'Maintained 99.9% uptime during third-party outages and sped up customer verification flows by 65%.',
+            architecture: 'Gateway Router API Proxy with client throttling controls.',
             technologies: ['Angular', 'Web API', 'REST', 'JSON'],
             link: '#'
         },
         {
             title: 'Customer Information System (CIS)',
             description: 'Centralized database and management interface for customer data, ensuring data integrity, quick retrieval, and compliant KYC processing.',
+            challenge: 'Managing heavy customer databases and complying with KYC/AML audits without slowing down service desks.',
+            solution: 'Engineered a centralized CIS portal in Angular, using optimized Entity Framework Core queries and lazy-loaded tab segments.',
+            impact: 'Accelerated customer search times under 150ms and achieved 100% compliance during regional KYC audits.',
+            architecture: 'Service-oriented database layer with CQRS query models.',
             technologies: ['Angular', 'C#', 'Entity Framework', 'Bootstrap'],
             link: '#'
         },
         {
             title: 'Mutual Fund Back-Office',
             description: 'Back-office administration tool for mutual fund management, tracking portfolio performance, user investments, and regulatory compliance reports.',
+            challenge: 'Visualizing volatile portfolio trends and generating audit reports with high latency and slow rendering cycles.',
+            solution: 'Developed a reactive portfolio dashboard in Angular 13 with RxJS debounce operators and PrimeNG data matrices.',
+            impact: 'Eliminated UI locks during high-frequency data streams and generated PDF audits in 2 seconds.',
+            architecture: 'RxJS reactive state streams and worker-thread background PDF generation.',
             technologies: ['Angular 13', 'RxJS', 'SQL', 'PrimeNG'],
             link: '#'
         },
         {
             title: 'Loan Against Shares (LAS)',
             description: 'End-to-end management system for processing loans against securities, including collateral valuation, limit management, and loan disbursement.',
+            challenge: 'Calculating loan limits against volatile equity securities dynamically without risking margin calls.',
+            solution: 'Created a real-time limits calculator with SQL Stored Procedures and an automated trigger-based risk engine.',
+            impact: 'Calculated collateral valuations instantly and dropped risk exposures by 28%.',
+            architecture: 'SQL transactional calculations backed by .NET Core background workers.',
             technologies: ['Angular', '.NET', 'SQL Stored Procedures'],
             link: '#'
         },
         {
             title: 'iROHUB E-Learning Platform',
             description: 'Interactive e-learning application delivering courses and assessments, featuring video streaming, progress tracking, and certification generation.',
+            challenge: 'Optimizing bandwidth consumption and tracking module progressions for thousands of concurrent video streams.',
+            solution: 'Built an e-learning container with Node.js streaming, custom video cache proxies, and MongoDB progress trackers.',
+            impact: 'Saved 30% bandwidth costs and supported 5K+ monthly active student certifications.',
+            architecture: 'Node.js video proxy gateway coupled with MongoDB event sourcing.',
             technologies: ['Angular', 'Node.js', 'MongoDB', 'Express'],
             link: '#'
         }

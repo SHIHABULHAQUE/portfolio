@@ -3,12 +3,13 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Mohammed Shihabul Haque | Senior Software Engineer</title>
+  <title>Mohammed Shihabul Haque | Senior Software Engineer & Team Lead</title>
   <base href="/">
   <meta name="description"
-    content="Portfolio of Mohammed Shihabul Haque, a Senior Software Engineer & Team Lead specializing in Angular and modern web technologies.">
+    content="Immersive engineering portfolio of Mohammed Shihabul Haque, Senior Software Engineer & Banking Technology Lead specializing in Angular, .NET Core, SQL Server, and High-Performance Enterprise Solutions.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=2">
+  <link rel="apple-touch-icon" href="assets/favicon.svg?v=2">
 
   <!-- Google Fonts: Outfit (Headings) & Inter (Body) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,10 +17,143 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap"
     rel="stylesheet">
+  
+  <!-- SEO: Canonical URL -->
+  <link rel="canonical" href="https://shihabulhaque.in/">
+
+  <!-- Instant Preloader Stylesheet -->
+  <style>
+    #app-preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #05070a;
+      z-index: 10000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.8s;
+      overflow: hidden;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .preloader-content {
+      text-align: center;
+      position: relative;
+    }
+
+    .preloader-logo {
+      font-weight: 800;
+      font-size: 1.8rem;
+      letter-spacing: 0.1em;
+      color: #ffffff;
+      margin-bottom: 1.5rem;
+      position: relative;
+      text-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+    }
+
+    .preloader-logo span {
+      color: #00f0ff;
+    }
+
+    .preloader-bar {
+      width: 200px;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.08);
+      margin: 0 auto;
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .preloader-progress {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, #00f0ff, #bd00ff);
+      box-shadow: 0 0 8px #00f0ff;
+      animation: load-progress 2.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes load-progress {
+      0% { width: 0%; }
+      30% { width: 40%; }
+      60% { width: 75%; }
+      100% { width: 100%; }
+    }
+
+    /* preloader exit modifier */
+    #app-preloader.loaded {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+  </style>
+
+  <!-- SEO: Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Mohammed Shihabul Haque",
+      "url": "https://shihabulhaque.in",
+      "image": "https://shihabulhaque.in/assets/images/profile.jpeg",
+      "jobTitle": "Senior Software Engineer & Team Lead",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Muthootu Mini"
+      },
+      "sameAs": [
+        "https://github.com/SHIHABULHAQUE",
+        "https://www.linkedin.com/in/mohammed-shihabul-haque/"
+      ],
+      "knowsAbout": [
+        "Angular",
+        ".NET Core",
+        "SQL Server",
+        "Software Architecture",
+        "Team Leadership",
+        "Web Development",
+        "Banking Systems"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Pattambi",
+        "addressRegion": "Kerala",
+        "addressCountry": "India"
+      }
+    }
+  </script>
 </head>
 
 <body>
+  <!-- Global Noise Overlay -->
+  <div class="noise-overlay"></div>
+
+  <!-- Global preloader -->
+  <div id="app-preloader">
+    <div class="preloader-content">
+      <div class="preloader-logo">&lt; <span>SHIHABUL HAQUE</span> /&gt;</div>
+      <div class="preloader-bar">
+        <div class="preloader-progress"></div>
+      </div>
+    </div>
+  </div>
+
   <app-root></app-root>
+
+  <script>
+    // Fade out preloader on window load
+    window.addEventListener('load', function () {
+      const preloader = document.getElementById('app-preloader');
+      setTimeout(function() {
+        if (preloader) {
+          preloader.classList.add('loaded');
+        }
+      }, 500); // Small delay for smooth exit transition
+    });
+  </script>
 </body>
 
 </html>

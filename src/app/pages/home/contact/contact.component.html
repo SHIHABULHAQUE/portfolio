@@ -1,40 +1,134 @@
 <section class="section contact-section" id="contact">
-    <div class="container">
-        <div class="content-wrapper">
-            <div class="profile-circle">
-                <!-- Placeholder for profile image, using initials -->
-                <div class="initials">MS</div>
-            </div>
+  <!-- Neon aurora backdrop -->
+  <div class="contact-glow"></div>
 
-            <h2 class="contact-name bracket-text">{{ profile.name }}</h2>
-
-            <div class="social-icons">
-                <a [href]="'mailto:' + profile.email" class="social-link" aria-label="Email">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                        <polyline points="22,6 12,13 2,6"></polyline>
-                    </svg>
-                </a>
-                <a href="#" class="social-link" aria-label="GitHub">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path
-                            d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
-                        </path>
-                    </svg>
-                </a>
-                <a href="#" class="social-link" aria-label="LinkedIn">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                        <rect x="2" y="9" width="4" height="12"></rect>
-                        <circle cx="4" cy="4" r="2"></circle>
-                    </svg>
-                </a>
-            </div>
-
-            <p class="footer-msg">Ready to build something amazing?</p>
-        </div>
+  <div class="container">
+    <div class="section-header centered">
+      <span class="section-subtitle bracket-text">CONTACT</span>
+      <h2 class="section-title">Initiate Transmission</h2>
     </div>
+
+    <div class="contact-grid">
+      <!-- Left Column: Profile Card & Direct CTAs -->
+      <div class="contact-info-card glass-panel">
+        <div class="profile-header">
+          <div class="avatar-glow">
+            <span class="avatar-initials">MS</span>
+            <div class="status-indicator">
+              <span class="status-pulse"></span>
+              <span class="status-text">Available</span>
+            </div>
+          </div>
+          <div class="profile-meta">
+            <h3 class="profile-name">{{ profile.name }}</h3>
+            <p class="profile-role">{{ profile.role }}</p>
+          </div>
+        </div>
+
+        <p class="availability-text">
+          Currently taking on premium freelancing, contract consulting, and enterprise Angular/.NET architectural roles.
+        </p>
+
+        <div class="direct-methods">
+          <a [href]="'mailto:' + profile.email" class="method-row">
+            <div class="method-icon email-ic">✉</div>
+            <div class="method-details">
+              <span class="method-lbl">Email Address</span>
+              <span class="method-val">{{ profile.email }}</span>
+            </div>
+          </a>
+          <a [href]="'tel:' + profile.phone" class="method-row">
+            <div class="method-icon phone-ic">☏</div>
+            <div class="method-details">
+              <span class="method-lbl">Phone Number</span>
+              <span class="method-val">{{ profile.phone }}</span>
+            </div>
+          </a>
+          <div class="method-row">
+            <div class="method-icon loc-ic">⚲</div>
+            <div class="method-details">
+              <span class="method-lbl">Primary Hub</span>
+              <span class="method-val">Kochi, Kerala, India</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Direct CTA Buttons -->
+        <div class="quick-ctas">
+          <a href="https://wa.me/919895113071?text=Hi%20Shihab" target="_blank" class="cta-btn whatsapp-cta">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-whatsapp" viewBox="0 0 16 16">
+              <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.949h.004c4.368 0 7.927-3.558 7.93-7.93a7.9 7.9 0 0 0-2.327-5.594ZM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.69-4.294c-.202-.101-1.196-.59-1.38-.658-.182-.067-.315-.101-.448.1-.134.2-.516.653-.632.786-.117.133-.233.15-.435.05-2.011-1.006-3.402-2.07-4.588-3.734-.177-.306-.354-.3-.518-.184-.13.093-.284.3-.43.475-.145.176-.192.292-.294.496-.102.204-.051.383-.026.483.026.1.248.408.578.694.492.425.908.556 1.217.618.309.062.593.048.818.014.25-.038.775-.316.883-.623.109-.307.109-.57.077-.624-.032-.054-.117-.087-.32-.19"/>
+            </svg>
+            WhatsApp Instant Chat
+          </a>
+          <a [href]="'mailto:' + profile.email" class="cta-btn email-cta">
+            ✉ Send Direct Email
+          </a>
+        </div>
+
+        <!-- Social link vectors -->
+        <div class="social-links-footer">
+          <a [href]="profile.social.github" target="_blank" aria-label="GitHub">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg>
+          </a>
+          <a [href]="profile.social.linkedin" target="_blank" aria-label="LinkedIn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+              <rect x="2" y="9" width="4" height="12"></rect>
+              <circle cx="4" cy="4" r="2"></circle>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Column: Interactive Form -->
+      <div class="contact-form-card glass-panel">
+        <!-- Success State Overlay -->
+        <div class="success-overlay" *ngIf="isSubmitted">
+          <div class="success-icon">✓</div>
+          <h3>Transmission Received</h3>
+          <p>Your message has successfully passed gateway integrity checks. Shihab will establish contact shortly.</p>
+          <button class="btn btn-primary" (click)="resetForm()">Send Another Message</button>
+        </div>
+
+        <form (submit)="onSubmit($event)" *ngIf="!isSubmitted">
+          <div class="form-title-row">
+            <h3>Secure Communication</h3>
+            <span class="encryption-badge">SSL Encrypted</span>
+          </div>
+
+          <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" 
+                   [(ngModel)]="formData.name" 
+                   placeholder="Enter name" required />
+            <div class="input-focus-line"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" 
+                   [(ngModel)]="formData.email" 
+                   placeholder="Enter email" required />
+            <div class="input-focus-line"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message Payload</label>
+            <textarea id="message" name="message" rows="5" 
+                      [(ngModel)]="formData.message" 
+                      placeholder="Enter details..." required></textarea>
+            <div class="input-focus-line"></div>
+          </div>
+
+          <button type="submit" class="submit-btn btn btn-primary" [disabled]="isLoading">
+            <span *ngIf="!isLoading">Transmit Message</span>
+            <span *ngIf="isLoading">Encrypting Payload...</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
 </section>

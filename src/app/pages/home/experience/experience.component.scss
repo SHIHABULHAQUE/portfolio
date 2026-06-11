@@ -1,122 +1,217 @@
 .experience-section {
   position: relative;
+  overflow: hidden;
 }
 
-.section-title {
-  text-align: center;
-  margin-bottom: 4rem;
-  font-size: 2.5rem;
-  background: linear-gradient(to right, var(--text-main), var(--text-muted));
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.xp-glow {
+  position: absolute;
+  top: 30%;
+  left: -10%;
+  width: 45vw;
+  height: 45vw;
+  background: radial-gradient(circle, rgba(var(--primary-rgb), 0.035) 0%, transparent 70%);
+  filter: blur(100px);
+  pointer-events: none;
 }
 
-.timeline {
+.timeline-container {
   position: relative;
-  max-width: 800px;
+  max-width: 850px;
   margin: 0 auto;
-  padding-left: 2rem;
-
-  &::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 2px;
-    background: var(--border);
+  padding-left: 3.5rem;
+  
+  @media (max-width: 576px) {
+    padding-left: 2rem;
   }
+}
+
+/* Base static background track line */
+.timeline-line-bg {
+  position: absolute;
+  left: 17px;
+  top: 10px;
+  bottom: 10px;
+  width: 2px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 2px;
+  
+  @media (max-width: 576px) {
+    left: 9px;
+  }
+}
+
+/* GSAP active scrolling progress tracker */
+.timeline-progress-bar {
+  position: absolute;
+  left: 17px;
+  top: 10px;
+  bottom: 10px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--primary) 0%, var(--accent) 70%, var(--secondary) 100%);
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.35);
+  transform-origin: top;
+  transform: scaleY(0);
+  border-radius: 2px;
+  z-index: 2;
+  
+  @media (max-width: 576px) {
+    left: 9px;
+  }
+}
+
+.timeline-list {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
 }
 
 .timeline-item {
   position: relative;
-  margin-bottom: 3rem;
-
-  &:last-child {
-    margin-bottom: 0;
-  }
 }
 
-.timeline-dot {
+/* Node indicator dot on timeline track */
+.timeline-node {
   position: absolute;
-  left: -2rem;
-  top: 0.5rem;
-  width: 1rem; // Total width taking adjust for center
-  height: 1rem;
-  // Actually centering it on the line
-  margin-left: -5px; // (2px line / 2) - (12px dot / 2) -> -5px
-  width: 12px;
-  height: 12px;
-  background: var(--primary);
+  left: -3.5rem;
+  top: 2.2rem;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
-  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
-  z-index: 1;
-}
+  background: var(--bg-dark);
+  border: 2px solid var(--primary);
+  z-index: 3;
+  transform: translateX(11px);
+  box-shadow: 0 0 8px rgba(0, 240, 255, 0.3);
+  
+  @media (max-width: 576px) {
+    left: -2rem;
+    transform: translateX(5px);
+  }
 
-.card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 2rem;
-  transition: transform 0.3s ease, border-color 0.3s ease;
-
-  &:hover {
-    transform: translateY(-5px);
-    border-color: var(--primary);
+  .node-pulse {
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border-radius: 50%;
+    border: 1px solid var(--primary);
+    opacity: 0.4;
+    animation: node-pulse-wave 2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
   }
 }
 
-.job-header {
-  margin-bottom: 1.5rem;
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 1rem;
+@keyframes node-pulse-wave {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  100% { transform: scale(2.2); opacity: 0; }
 }
 
-.role {
-  color: var(--primary);
-  font-size: 1.25rem;
-  margin-bottom: 0.25rem;
+/* Glass Card */
+.timeline-card {
+  padding: 2.5rem;
+  
+  @media (max-width: 576px) {
+    padding: 1.5rem;
+  }
 }
 
-.company {
-  display: block;
+.card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
   font-weight: 600;
-  font-size: 1.1rem;
-  margin-bottom: 0.5rem;
-}
-
-.period,
-.location {
-  display: inline-block;
-  font-size: 0.9rem;
+  text-transform: uppercase;
   color: var(--text-muted);
-  margin-right: 1rem;
-
-  &::before {
-    content: '• ';
+  margin-bottom: 1rem;
+  letter-spacing: 0.08em;
+  
+  @media (max-width: 576px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
   }
 
-  &:first-of-type::before {
-    content: '';
+  .job-period {
+    color: var(--primary);
+    background: rgba(0, 240, 255, 0.06);
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 240, 255, 0.12);
+  }
+
+  .job-location {
+    display: flex;
+    align-items: center;
+    gap: 4px;
   }
 }
 
-.job-description {
-  list-style-type: none;
-  padding: 0;
+.card-header {
+  margin-bottom: 1.5rem;
+  
+  .job-role {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 0.4rem;
+    letter-spacing: -0.01em;
+  }
 
+  .job-company {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .company-name {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 700;
+    background: linear-gradient(to right, #ffffff, #94a3b8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Cyber badge for domain highlights */
+  .banking-tag {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    background: rgba(189, 0, 255, 0.1);
+    color: #e0aaff;
+    border: 1px solid rgba(189, 0, 255, 0.2);
+    box-shadow: 0 0 10px rgba(189, 0, 255, 0.05);
+  }
+}
+
+.job-details {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  
   li {
-    position: relative;
-    padding-left: 1.5rem;
-    margin-bottom: 0.75rem;
-    color: var(--text-secondary);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
 
-    &::before {
-      content: '▹';
-      position: absolute;
-      left: 0;
-      color: var(--primary);
-    }
+  .bullet-arrow {
+    color: var(--primary);
+    font-size: 1rem;
+    line-height: 1.35;
+    text-shadow: 0 0 6px var(--primary);
+  }
+
+  .bullet-desc {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.5;
   }
 }

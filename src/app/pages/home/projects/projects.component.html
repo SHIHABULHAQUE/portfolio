@@ -1,44 +1,173 @@
 <section class="section projects-section" id="projects">
+  <!-- Glowing aurora background lights -->
+  <div class="projects-glow"></div>
+
   <div class="container">
     <div class="section-header">
-      <span class="section-subtitle bracket-text">Portfolio</span>
-      <h2 class="section-title">Featured Projects</h2>
+      <span class="section-subtitle bracket-text">WORKS</span>
+      <h2 class="section-title">Case Studies & Projects</h2>
     </div>
 
-    <div class="projects-grid">
-      <div class="project-card" *ngFor="let project of projects; let i = index">
-        <div class="card-visual">
-          <div class="folder-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
-            </svg>
-          </div>
-          <div class="external-link" *ngIf="project.link">
-            <a [href]="project.link" target="_blank">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                <polyline points="15 3 21 3 21 9"></polyline>
-                <line x1="10" y1="14" x2="21" y2="3"></line>
-              </svg>
-            </a>
-          </div>
-        </div>
+    <!-- Incremental Hydration Deferment -->
+    @defer (on viewport; prefetch on idle) {
+      <div class="projects-grid">
+        @for (project of projects(); track project.title; let i = $index) {
+          <div class="project-card glass-panel" [class.expanded]="expandedIndex() === i">
+            
+            <div class="card-visual-wrapper">
+              <!-- Premium CSS Simulated Application Screens -->
+              <div class="simulated-browser">
+                <div class="browser-header">
+                  <div class="browser-dots">
+                    <span class="bdot red"></span>
+                    <span class="bdot yellow"></span>
+                    <span class="bdot green"></span>
+                  </div>
+                  <div class="browser-address-bar">{{ getSimulatedUrl(i) }}</div>
+                </div>
+                
+                <div class="browser-content">
+                  <!-- Custom mock screens based on project index -->
+                  <!-- 0. ERP Application -->
+                  @if (i === 0) {
+                    <div class="mock-screen erp-screen">
+                      <div class="mock-row mini-header">
+                        <div class="mock-logo"></div>
+                        <div class="mock-pills"><div></div><div></div></div>
+                      </div>
+                      <div class="mock-chart-grid">
+                        <div class="mock-chart-bar" style="height: 60%"></div>
+                        <div class="mock-chart-bar" style="height: 85%"></div>
+                        <div class="mock-chart-bar" style="height: 45%"></div>
+                        <div class="mock-chart-bar" style="height: 95%"></div>
+                      </div>
+                      <div class="mock-row flex-stats">
+                        <div class="stat-bubble"></div>
+                        <div class="stat-bubble"></div>
+                      </div>
+                    </div>
+                  }
 
-        <div class="card-body">
-          <h3 class="project-title">{{ project.title }}</h3>
-          <p class="project-desc">{{ project.description }}</p>
+                  <!-- 1. Integrations Gateway -->
+                  @if (i === 1) {
+                    <div class="mock-screen gateway-screen">
+                      <div class="gateway-nodes">
+                        <div class="node central">API</div>
+                        <div class="connector line-1"></div>
+                        <div class="connector line-2"></div>
+                        <div class="connector line-3"></div>
+                        <div class="node leaf-1">SIP</div>
+                        <div class="node leaf-2">INS</div>
+                        <div class="node leaf-3">PAN</div>
+                      </div>
+                    </div>
+                  }
 
-          <div class="tech-stack">
-            <span class="tech-pill" *ngFor="let tech of project.technologies">{{ tech }}</span>
-          </div>
+                  <!-- 2. Customer Information System -->
+                  @if (i === 2) {
+                    <div class="mock-screen cis-screen">
+                      <div class="cis-search-bar"></div>
+                      <div class="cis-profile-row">
+                        <div class="avatar"></div>
+                        <div class="details"><div class="line"></div><div class="sub-line"></div></div>
+                      </div>
+                      <div class="cis-badge-row">
+                        <div class="badge-mini green">KYC OK</div>
+                        <div class="badge-mini blue">AML PASS</div>
+                      </div>
+                    </div>
+                  }
 
-          <div class="card-actions">
-            <!-- Optional: Detailed view or code link -->
+                  <!-- 3. Mutual Fund Back-Office -->
+                  @if (i === 3) {
+                    <div class="mock-screen mf-screen">
+                      <div class="pie-chart-mock">
+                        <div class="inner-circle"></div>
+                      </div>
+                      <div class="mf-legends">
+                        <div class="legend"><span class="dot equity"></span></div>
+                        <div class="legend"><span class="dot debt"></span></div>
+                      </div>
+                    </div>
+                  }
+
+                  <!-- 4. Loan Against Shares -->
+                  @if (i === 4) {
+                    <div class="mock-screen las-screen">
+                      <div class="las-gauge">
+                        <div class="gauge-value">70%</div>
+                      </div>
+                      <div class="las-table">
+                        <div class="table-row"><div class="col">RELIANCE</div><div class="col val green">80%</div></div>
+                        <div class="table-row"><div class="col">TCS</div><div class="col val green">75%</div></div>
+                      </div>
+                    </div>
+                  }
+
+                  <!-- 5. iROHUB Platform -->
+                  @if (i === 5) {
+                    <div class="mock-screen elearning-screen">
+                      <div class="video-player-mock">
+                        <div class="play-triangle"></div>
+                      </div>
+                      <div class="video-progress"></div>
+                    </div>
+                  }
+                </div>
+              </div>
+            </div>
+
+            <div class="card-details-wrapper">
+              <div class="card-header-block">
+                <h3 class="project-title">{{ project.title }}</h3>
+                <div class="tech-stagger">
+                  @for (tech of project.technologies; track tech) {
+                    <span class="tech-pill">{{ tech }}</span>
+                  }
+                </div>
+                <p class="project-desc">{{ project.description }}</p>
+              </div>
+
+              <!-- Expansion Cases content -->
+              <div class="expandable-content" [class.show]="expandedIndex() === i">
+                <div class="divider-line"></div>
+                
+                <div class="case-study-grid">
+                  <div class="case-block">
+                    <span class="case-label challenge-lbl">Challenge</span>
+                    <p class="case-text">{{ project.challenge }}</p>
+                  </div>
+
+                  <div class="case-block">
+                    <span class="case-label solution-lbl">Solution</span>
+                    <p class="case-text">{{ project.solution }}</p>
+                  </div>
+
+                  <div class="case-block">
+                    <span class="case-label impact-lbl">Impact</span>
+                    <p class="case-text text-glow-cyan">{{ project.impact }}</p>
+                  </div>
+
+                  <div class="case-block">
+                    <span class="case-label architecture-lbl">Architecture</span>
+                    <p class="case-text">{{ project.architecture }}</p>
+                  </div>
+                </div>
+              </div>
+
+              <button class="expand-btn btn" (click)="toggleExpand(i)">
+                {{ expandedIndex() === i ? 'Collapse Case Study' : 'View Full Case Study' }}
+                <span class="arrow-symbol" [class.rotated]="expandedIndex() === i">↓</span>
+              </button>
+            </div>
+
           </div>
-        </div>
+        }
       </div>
-    </div>
+    } @placeholder {
+      <div class="projects-grid-placeholder" style="height: 400px; display: flex; justify-content: center; align-items: center; background: rgba(255,255,255,0.01); border-radius: 12px; border: 1px dashed rgba(255,255,255,0.05); color: var(--text-dim); font-family: var(--font-heading); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;">
+        Detecting Orbital Entrance...
+      </div>
+    }
   </div>
 </section>

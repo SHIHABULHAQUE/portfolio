@@ -1,0 +1,61 @@
+<!-- Floating Joystick Button -->
+<button class="joystick-btn" (click)="toggleGame()" aria-label="Play Arcade">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="6" width="20" height="12" rx="2"></rect>
+        <path d="M6 12h4"></path>
+        <path d="M8 10v4"></path>
+        <circle cx="17" cy="12" r="1"></circle>
+        <path d="M15 12h.01"></path>
+    </svg>
+    <div class="pulse"></div>
+</button>
+
+<!-- Game Modal -->
+<div class="game-overlay" *ngIf="isVisible" (click)="toggleGame()">
+    <div class="game-container" (click)="$event.stopPropagation()">
+
+        <div class="game-header">
+            <h3>{{ activeGame === 'menu' ? 'ARCADE SUITE' : activeGame.toUpperCase() }}</h3>
+            <button class="close-btn" (click)="toggleGame()">&times;</button>
+        </div>
+
+        <!-- MENU VIEW -->
+        <div class="game-menu" *ngIf="activeGame === 'menu'">
+            <button *ngFor="let g of games" class="game-card" (click)="selectGame(g.id)">
+                <span class="game-icon">{{ g.icon }}</span>
+                <span class="game-name">{{ g.name }}</span>
+            </button>
+        </div>
+
+        <!-- GAME VIEW -->
+        <div class="game-stage" *ngIf="activeGame !== 'menu'">
+            <div class="score-board">
+                <button class="back-btn" (click)="backToMenu()">◀ MENU</button>
+                <span>Score: {{ score }}</span>
+                <span>High: {{ highScore }}</span>
+            </div>
+
+            <canvas #gameCanvas></canvas>
+
+            <div class="game-controls" *ngIf="!isGameRunning">
+                <button class="start-btn" (click)="startGame()">START GAME</button>
+            </div>
+
+            <!-- Generic Mobile Controls -->
+            <div class="mobile-controls">
+                <div class="d-pad">
+                    <button (click)="handleMobileControl('up')">▲</button>
+                    <div class="row">
+                        <button (click)="handleMobileControl('left')">◀</button>
+                        <button (click)="handleMobileControl('down')">▼</button>
+                        <button (click)="handleMobileControl('right')">▶</button>
+                    </div>
+                </div>
+                <!-- Action Button for shooter/jump -->
+                <button class="action-btn" (click)="handleMobileControl('btn')">●</button>
+            </div>
+        </div>
+
+    </div>
+</div>

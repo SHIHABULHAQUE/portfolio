@@ -1,49 +1,89 @@
 <section class="hero-section" id="hero">
+  <!-- Glowing subtle lights -->
+  <div class="hero-glow-container">
+    <div class="hero-glow cyan"></div>
+    <div class="hero-glow purple"></div>
+  </div>
+
   <div class="container hero-content">
     <div class="text-content">
-      <div class="greeting-wrapper">
-        <span class="greeting-symbol">></span>
-        <span class="greeting-text">Start</span>
+      <!-- Cyber badge -->
+      <div class="hero-badge">
+        <span class="pulse-dot"></span>
+        <span class="badge-text bracket-text">HELLO, I AM</span>
       </div>
 
-      <h1 class="name">{{ data.name }}</h1>
-      <h2 class="role">{{ data.role }}</h2>
-      <p class="summary">{{ data.summary }}</p>
+      <!-- Main developer name -->
+      <h1 class="hero-title">
+        MOHAMMED<br>
+        <span class="text-glow-cyan text-gradient">SHIHABUL HAQUE</span>
+      </h1>
 
-      <div class="cta-group">
-        <a href="/resume.pdf" target="_blank" class="btn btn-primary-outline">
-          Download Resume
+      <!-- Immersive typewriter statements -->
+      <div class="typewriter-container">
+        <div class="typewriter-line line-1">
+          <span class="symbol">> </span>
+          <span class="typed-text">{{ display1() }}</span>
+          <span class="cursor" [class.blink]="isCursor1Blinking()">|</span>
+        </div>
+        <div class="typewriter-line line-2" *ngIf="display1().length > 0 || display2().length > 0">
+          <span class="symbol">> </span>
+          <span class="typed-text">{{ display2() }}</span>
+          <span class="cursor" [class.blink]="isCursor2Blinking()" *ngIf="display1().length === typewriterText1.length">|</span>
+        </div>
+      </div>
+
+      <!-- Subtitle Tech Tag Orbit/Pills -->
+      <div class="hero-tech-list">
+        <span class="tech-item">Angular</span>
+        <span class="divider">•</span>
+        <span class="tech-item">.NET</span>
+        <span class="divider">•</span>
+        <span class="tech-item">SQL Server</span>
+        <span class="divider">•</span>
+        <span class="tech-item">Banking Solutions</span>
+      </div>
+
+      <!-- Call to actions -->
+      <div class="cta-wrapper">
+        <a href="#experience" class="btn btn-primary" (click)="scrollToSection($event, 'experience')">
+          Explore Experience
         </a>
-        <a href="#contact" class="btn btn-link">
-          Contact Me
+        <a href="#contact" class="btn btn-secondary" (click)="scrollToSection($event, 'contact')">
+          Get in Touch
         </a>
       </div>
     </div>
 
+    <!-- Right Side: Cyber Card Container -->
     <div class="visual-content">
-      <div class="code-window-container">
-        <div class="code-window">
-          <div class="window-header">
-            <span class="dot red"></span>
-            <span class="dot yellow"></span>
-            <span class="dot green"></span>
-            <span class="window-title">developer.ts</span>
+      <div class="glass-terminal glass-panel">
+        <div class="terminal-header">
+          <div class="terminal-dots">
+            <span class="tdot red"></span>
+            <span class="tdot yellow"></span>
+            <span class="tdot green"></span>
           </div>
-          <div class="window-body">
-            <div class="code-line"><span class="keyword">const</span> <span class="var">developer</span> <span
-                class="op">=</span> <span class="brace">{{ '{' }}</span></div>
-            <div class="code-line indent"> name: <span class="string">'{{ data.name }}'</span>,</div>
-            <div class="code-line indent"> role: <span class="string">'{{ data.role }}'</span>,</div>
-            <div class="code-line indent"> skills: <span class="bracket">[</span></div>
-            <div class="code-line double-indent"> <span class="string">'Angular'</span>, <span
-                class="string">'.NET'</span>, <span class="string">'SQL'</span></div>
-            <div class="code-line indent"> <span class="bracket">]</span>,</div>
-            <div class="code-line indent"> hardWorker: <span class="bool">true</span>,</div>
-            <div class="code-line indent"> problemSolver: <span class="bool">true</span></div>
-            <div class="code-line"><span class="brace">{{ '}' }}</span>;</div>
-          </div>
+          <div class="terminal-title">system_profile.cs</div>
         </div>
-        <div class="glow-bg"></div>
+        <div class="terminal-body">
+          <div class="code-line"><span class="t-keyword">using</span> System.Collections.Generic;</div>
+          <div class="code-line"><span class="t-keyword">using</span> System.Threading.Tasks;</div>
+          <br>
+          <div class="code-line"><span class="t-keyword">public class</span> <span class="t-class">SeniorEngineer</span></div>
+          <div class="code-line">&#123;</div>
+          <div class="code-line indent"><span class="t-keyword">public string</span> Name &#61; <span class="t-string">"Mohammed Shihabul Haque"</span>;</div>
+          <div class="code-line indent"><span class="t-keyword">public string</span> Role &#61; <span class="t-string">"Enterprise Tech Lead"</span>;</div>
+          <div class="code-line indent"><span class="t-keyword">public double</span> ExperienceYears &#61; <span class="t-number">5.6</span>;</div>
+          <div class="code-line indent"><span class="t-keyword">public string</span> Location &#61; <span class="t-string">"Kochi, India"</span>;</div>
+          <br>
+          <div class="code-line indent"><span class="t-keyword">public</span> List&lt;<span class="t-keyword">string</span>&gt; Specialities &#61; <span class="t-keyword">new</span>() &#123;</div>
+          <div class="code-line double-indent"><span class="t-string">"Angular Ecosystems"</span>,</div>
+          <div class="code-line double-indent"><span class="t-string">"Core Banking Systems"</span>,</div>
+          <div class="code-line double-indent"><span class="t-string">".NET Enterprise APIs"</span></div>
+          <div class="code-line indent">&#125;;</div>
+          <div class="code-line">&#125;</div>
+        </div>
       </div>
     </div>
   </div>

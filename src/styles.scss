@@ -1,46 +1,48 @@
 /* =========================================
-   1. VARIABLES & THEME SETUP (Reference Match)
+   1. GLOBAL GOOGLE FONTS & ANCHORS
    ========================================= */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Space+Grotesk:wght@300..700&display=swap');
+
 :root {
-  /* Theme: Dark Navy & Neon Cyan */
-  --bg-dark: #0b0e14;
-  /* Deepest Navy */
-  --bg-card: #151922;
-  /* Lighter Navy for cards */
-  --bg-card-hover: #1c2333;
-  /* Hover state */
-
-  --primary: #00f0ff;
-  /* Neon Cyan/Teal */
-  --primary-glow: rgba(0, 240, 255, 0.4);
-  --secondary: #64ffda;
-  /* Secondary Green/Teal */
-
-  --text-main: #e6f1ff;
-  /* Off-white */
-  --text-muted: #8892b0;
-  /* Muted blue-grey */
-  --text-dim: #495670;
-  /* Darker text */
-
-  --border: #233554;
-  --border-focus: #00f0ff;
-
-  /* Typography */
-  --font-heading: 'Outfit', sans-serif;
-  --font-body: 'Inter', sans-serif;
-
-  /* Spacing */
-  --container-width: 1100px;
-  --header-height: 80px;
-
-  /* Transitions */
-  --transition-fast: 0.2s ease;
-  --transition-smooth: 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+  /* Absolute Obsidian Luxury Space Palette */
+  --bg-dark: #030303;      /* Absolute absorbing black */
+  --bg-card: rgba(10, 12, 16, 0.45); /* Highly transparent soot gray */
+  --bg-card-hover: rgba(16, 18, 24, 0.65);
+  
+  /* Dynamic Accents managed by ThemeService */
+  --primary: #00f0ff;      
+  --primary-rgb: 0, 240, 255;
+  --primary-glow: rgba(0, 240, 255, 0.25);
+  
+  --secondary: #64ffda;    
+  --secondary-rgb: 100, 255, 218;
+  --accent: #bd00ff;       
+  --accent-rgb: 189, 0, 255;
+  --accent-orange: #ff5e00;
+  
+  /* Silver & Slate Typographical Scales */
+  --text-main: #fcfcfc;    /* Pure nebula silver */
+  --text-muted: #94a3b8;   /* Soft star slate */
+  --text-dim: #475569;     
+  
+  /* Frosted Glass Properties */
+  --border-glass: rgba(255, 255, 255, 0.05);
+  --border-glass-active: rgba(var(--primary-rgb), 0.25);
+  --shadow-glass: 0 20px 45px rgba(0, 0, 0, 0.6);
+  
+  /* Typography Configuration */
+  --font-heading: 'Space Grotesk', -apple-system, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  
+  /* Motion Constants */
+  --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* =========================================
-   2. RESET & BASE
+   2. SYSTEM BASE & RESET
    ========================================= */
 * {
   box-sizing: border-box;
@@ -49,147 +51,224 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto !important;
 }
 
-body {
-  font-family: var(--font-body);
+html, body {
+  min-height: 100%;
+  width: 100%;
   background-color: var(--bg-dark);
   color: var(--text-main);
+  font-family: var(--font-body);
   line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
 
-/* Scrollbar */
+/* Custom Minimalist Scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 6px;
 }
-
 ::-webkit-scrollbar-track {
   background: var(--bg-dark);
 }
-
 ::-webkit-scrollbar-thumb {
-  background: #233554;
-  border-radius: 5px;
-  border: 2px solid var(--bg-dark);
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 3px;
+  transition: background 0.3s;
 }
-
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--text-dim);
-}
-
-/* Selection */
-::selection {
-  background: rgba(0, 240, 255, 0.2);
-  color: var(--primary);
-}
-
-/* =========================================
-   3. TYPOGRAPHY & UTILITIES
-   ========================================= */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  line-height: 1.1;
-  color: var(--text-main);
-  margin-bottom: 1rem;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-  transition: var(--transition-fast);
-}
-
-.container {
-  max-width: var(--container-width);
-  margin: 0 auto;
-  padding: 0 1.5rem;
-}
-
-.section {
-  padding: 6rem 0;
-}
-
-.text-cyan {
-  color: var(--primary);
-}
-
-/* Button Styles (Reference Match: Outline & Glow) */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.75rem 1.5rem;
-  font-family: var(--font-heading);
-  font-weight: 600;
-  font-size: 0.9rem;
-  border-radius: 4px;
-  /* Sharper corners like ref */
-  cursor: pointer;
-  transition: var(--transition-fast);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.btn-primary {
-  background: transparent;
-  color: var(--primary);
-  border: 1px solid var(--primary);
-  position: relative;
-  overflow: hidden;
-
-  &:hover {
-    background: rgba(0, 240, 255, 0.1);
-    box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
-    transform: translateY(-2px);
-  }
-}
-
-.btn-solid {
   background: var(--primary);
-  color: var(--bg-dark);
-  border: 1px solid var(--primary);
-
-  &:hover {
-    background: transparent;
-    color: var(--primary);
-  }
 }
 
 /* =========================================
-   4. BACKGROUND PATTERNS
+   3. THEME OVERLAYS & AMBIENCE GLOWS
    ========================================= */
-.bg-pixel-pattern {
+.noise-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+.aurora-bg {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1;
-  opacity: 0.03;
-  background-image:
-    linear-gradient(var(--text-muted) 1px, transparent 1px),
-    linear-gradient(90deg, var(--text-muted) 1px, transparent 1px);
-  background-size: 50px 50px;
+  z-index: -3;
   pointer-events: none;
+  overflow: hidden;
+  filter: blur(140px);
+  opacity: 0.35;
 }
 
-/* Decorative 'Code' Brackets */
+.aurora-blob {
+  position: absolute;
+  border-radius: 50%;
+  mix-blend-mode: screen;
+  animation: aurora-drift 24s infinite alternate var(--ease-premium);
+}
+
+.aurora-blob.cyan {
+  width: 65vw;
+  height: 65vw;
+  background: radial-gradient(circle, rgba(var(--primary-rgb), 0.2) 0%, transparent 70%);
+  top: -10%;
+  left: -10%;
+}
+
+.aurora-blob.purple {
+  width: 60vw;
+  height: 60vw;
+  background: radial-gradient(circle, rgba(189, 0, 255, 0.15) 0%, transparent 70%);
+  bottom: -10%;
+  right: -5%;
+  animation-duration: 30s;
+}
+
+@keyframes aurora-drift {
+  0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  50% { transform: translate(8%, 5%) scale(1.1) rotate(180deg); }
+  100% { transform: translate(-5%, -8%) scale(0.9) rotate(360deg); }
+}
+
+.glass-panel {
+  background: var(--bg-card);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--border-glass);
+  border-radius: 20px;
+  box-shadow: var(--shadow-glass);
+  transition: border-color var(--transition-smooth), background-color var(--transition-smooth), transform var(--transition-smooth);
+  
+  &:hover {
+    border-color: var(--border-glass-active);
+    background: var(--bg-card-hover);
+  }
+}
+
+/* =========================================
+   4. LUXURY ASYMMETRICAL TYPOGRAPHY
+   ========================================= */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+}
+
+.section-header {
+  margin-bottom: 6rem;
+  
+  &.centered {
+    text-align: center;
+  }
+}
+
+.section-subtitle {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: var(--primary);
+  margin-bottom: 1.25rem;
+  display: block;
+}
+
+.section-title {
+  font-size: clamp(2.5rem, 6vw, 4.2rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  background: linear-gradient(135deg, #ffffff 30%, rgba(255, 255, 255, 0.6) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 2rem;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 3rem;
+  position: relative;
+  
+  @media (max-width: 768px) {
+    padding: 0 1.5rem;
+  }
+}
+
+.section {
+  padding: 10rem 0;
+  position: relative;
+  
+  @media (max-width: 768px) {
+    padding: 7rem 0;
+  }
+}
+
+/* =========================================
+   5. BUTTONS & CYBERNETIC DETAILS
+   ========================================= */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2.5rem;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border-radius: 40px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition-smooth);
+  border: 1px solid transparent;
+}
+
+.btn-primary {
+  background: #ffffff;
+  color: #030303;
+  box-shadow: 0 10px 25px rgba(255, 255, 255, 0.05);
+  
+  &:hover {
+    background: var(--primary);
+    color: #030303;
+    box-shadow: 0 15px 35px rgba(var(--primary-rgb), 0.3);
+    transform: translateY(-3px);
+  }
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.02);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  
+  &:hover {
+    border-color: var(--primary);
+    background: rgba(var(--primary-rgb), 0.05);
+    transform: translateY(-3px);
+  }
+}
+
+.text-glow-cyan {
+  text-shadow: 0 0 15px rgba(var(--primary-rgb), 0.45);
+}
+
 .bracket-text::before {
-  content: '< ';
+  content: '[ ';
   color: var(--primary);
-  font-weight: 700;
 }
-
 .bracket-text::after {
-  content: ' />';
+  content: ' ]';
   color: var(--primary);
-  font-weight: 700;
 }
