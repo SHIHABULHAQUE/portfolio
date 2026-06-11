@@ -74,13 +74,13 @@ export const RESUME_DATA = {
             degree: 'Bachelor of Computer Application (BCA)',
             field: 'Computer Science',
             institution: 'MES KVM College, Valanchery',
-            year: '2020'
+            year: '2019'
         },
         {
             degree: 'Higher Secondary Education',
             field: 'Computer Science',
             institution: 'GHSS - Pattambi',
-            year: '2017'
+            year: '2016'
         }
     ],
     skills: [
