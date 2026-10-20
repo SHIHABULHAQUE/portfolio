@@ -1,35 +1,41 @@
+// The arcade keeps its retro-neon palette, scoped to this component.
+:host {
+    --primary: #00f0ff;
+    --secondary: #64ffda;
+    --text-main: #fcfcfc;
+    --text-muted: #94a3b8;
+    --font-heading: 'Manrope', system-ui, sans-serif;
+    --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 .joystick-btn {
     position: fixed;
-    bottom: 2.2rem;
-    right: 2.2rem;
-    width: 60px;
-    height: 60px;
+    bottom: 1.8rem;
+    right: 1.8rem;
+    width: 54px;
+    height: 54px;
     border-radius: 50%;
-    background: rgba(10, 15, 26, 0.5);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1.5px solid var(--primary);
-    color: var(--primary);
+    background: var(--ink);
+    border: 1px solid var(--sand);
+    color: var(--paper);
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     z-index: 1000;
-    box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+    box-shadow: 0 14px 30px -10px rgba(28, 42, 33, 0.6);
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 
     &:hover {
-        transform: scale(1.15) rotate(15deg);
-        background: linear-gradient(135deg, rgba(0, 240, 255, 0.2) 0%, rgba(189, 0, 255, 0.2) 100%);
-        border-color: #ffffff;
-        color: #ffffff;
-        box-shadow: 0 0 35px rgba(0, 240, 255, 0.6);
+        transform: scale(1.1) rotate(12deg);
+        background: var(--moss);
+        border-color: var(--moss);
     }
 
     svg {
-        width: 28px;
-        height: 28px;
-        filter: drop-shadow(0 0 5px var(--primary));
+        width: 24px;
+        height: 24px;
     }
 
     .pulse {
@@ -37,8 +43,8 @@
         width: 100%;
         height: 100%;
         border-radius: 50%;
-        border: 1.5px solid var(--primary);
-        animation: joystick-pulse 2s infinite;
+        border: 1px solid var(--sand);
+        animation: joystick-pulse 2.4s infinite;
         opacity: 0;
     }
 }

@@ -1,14 +1,23 @@
-<section class="section education-section">
-  <div class="container">
-    <h2 class="section-title">Education</h2>
+<section class="section education" id="education">
+  <app-section-heading index="03" eyebrow="Where I learned" title="Education" script="roots" />
 
-    <div class="education-grid">
-      <div class="edu-card" *ngFor="let edu of education">
-        <h3 class="degree">{{ edu.degree }}</h3>
-        <p class="field" *ngIf="edu.field">{{ edu.field }}</p>
-        <p class="institution">{{ edu.institution }}</p>
-        <span class="year" *ngIf="edu.year">{{ edu.year }}</span>
-      </div>
-    </div>
+  <div class="cards">
+    @for (edu of education; track edu.degree; let i = $index) {
+      <article class="card" [appReveal]="i * 0.1">
+        <span class="year">{{ edu.year }}</span>
+        <div>
+          <h3>{{ edu.degree }}</h3>
+          <p class="field">{{ edu.field }}</p>
+          <p class="institution">{{ edu.institution }}</p>
+        </div>
+      </article>
+    }
   </div>
+
+  <p class="certs" appReveal>
+    <span class="eyebrow">Certified in</span>
+    @for (cert of certifications; track cert) {
+      <span class="cert">{{ cert }}</span>
+    }
+  </p>
 </section>

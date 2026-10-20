@@ -1,217 +1,117 @@
-.experience-section {
-  position: relative;
-  overflow: hidden;
-}
-
-.xp-glow {
-  position: absolute;
-  top: 30%;
-  left: -10%;
-  width: 45vw;
-  height: 45vw;
-  background: radial-gradient(circle, rgba(var(--primary-rgb), 0.035) 0%, transparent 70%);
-  filter: blur(100px);
-  pointer-events: none;
-}
-
-.timeline-container {
-  position: relative;
-  max-width: 850px;
-  margin: 0 auto;
-  padding-left: 3.5rem;
-  
-  @media (max-width: 576px) {
-    padding-left: 2rem;
-  }
-}
-
-/* Base static background track line */
-.timeline-line-bg {
-  position: absolute;
-  left: 17px;
-  top: 10px;
-  bottom: 10px;
-  width: 2px;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 2px;
-  
-  @media (max-width: 576px) {
-    left: 9px;
-  }
-}
-
-/* GSAP active scrolling progress tracker */
-.timeline-progress-bar {
-  position: absolute;
-  left: 17px;
-  top: 10px;
-  bottom: 10px;
-  width: 2px;
-  background: linear-gradient(to bottom, var(--primary) 0%, var(--accent) 70%, var(--secondary) 100%);
-  box-shadow: 0 0 10px rgba(0, 240, 255, 0.35);
-  transform-origin: top;
-  transform: scaleY(0);
-  border-radius: 2px;
-  z-index: 2;
-  
-  @media (max-width: 576px) {
-    left: 9px;
-  }
-}
-
-.timeline-list {
-  display: flex;
-  flex-direction: column;
-  gap: 3.5rem;
-}
-
-.timeline-item {
-  position: relative;
-}
-
-/* Node indicator dot on timeline track */
-.timeline-node {
-  position: absolute;
-  left: -3.5rem;
-  top: 2.2rem;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: var(--bg-dark);
-  border: 2px solid var(--primary);
-  z-index: 3;
-  transform: translateX(11px);
-  box-shadow: 0 0 8px rgba(0, 240, 255, 0.3);
-  
-  @media (max-width: 576px) {
-    left: -2rem;
-    transform: translateX(5px);
-  }
-
-  .node-pulse {
-    position: absolute;
-    top: -4px;
-    left: -4px;
-    right: -4px;
-    bottom: -4px;
-    border-radius: 50%;
-    border: 1px solid var(--primary);
-    opacity: 0.4;
-    animation: node-pulse-wave 2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
-  }
-}
-
-@keyframes node-pulse-wave {
-  0% { transform: scale(0.9); opacity: 0.8; }
-  100% { transform: scale(2.2); opacity: 0; }
-}
-
-/* Glass Card */
-.timeline-card {
-  padding: 2.5rem;
-  
-  @media (max-width: 576px) {
-    padding: 1.5rem;
-  }
-}
-
-.card-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-family: var(--font-heading);
-  font-size: 0.8rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  margin-bottom: 1rem;
-  letter-spacing: 0.08em;
-  
-  @media (max-width: 576px) {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.4rem;
-  }
-
-  .job-period {
-    color: var(--primary);
-    background: rgba(0, 240, 255, 0.06);
-    padding: 0.25rem 0.75rem;
-    border-radius: 12px;
-    border: 1px solid rgba(0, 240, 255, 0.12);
-  }
-
-  .job-location {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
-}
-
-.card-header {
-  margin-bottom: 1.5rem;
-  
-  .job-role {
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: #ffffff;
-    margin-bottom: 0.4rem;
-    letter-spacing: -0.01em;
-  }
-
-  .job-company {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-
-  .company-name {
-    font-family: var(--font-heading);
-    font-size: 1.1rem;
-    font-weight: 700;
-    background: linear-gradient(to right, #ffffff, #94a3b8);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  /* Cyber badge for domain highlights */
-  .banking-tag {
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    padding: 0.2rem 0.6rem;
-    border-radius: 4px;
-    background: rgba(189, 0, 255, 0.1);
-    color: #e0aaff;
-    border: 1px solid rgba(189, 0, 255, 0.2);
-    box-shadow: 0 0 10px rgba(189, 0, 255, 0.05);
-  }
-}
-
-.job-details {
+.timeline {
   list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  
+  position: relative;
+
+  // the ink line
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0.6rem;
+    bottom: 0;
+    left: calc(220px + 1.5rem);
+    width: 1px;
+    background: linear-gradient(var(--line-strong), var(--line) 85%, transparent);
+
+    @media (max-width: 768px) {
+      left: 5px;
+    }
+  }
+}
+
+.job {
+  display: grid;
+  grid-template-columns: 220px 3rem 1fr;
+  padding-bottom: 4rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    padding-left: 2rem;
+    position: relative;
+  }
+}
+
+.job-when {
+  text-align: right;
+  padding-top: 0.2rem;
+
+  @media (max-width: 768px) {
+    text-align: left;
+    margin-bottom: 0.6rem;
+  }
+}
+
+.period {
+  display: block;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.2rem;
+  color: var(--ink);
+}
+
+.place {
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.node {
+  justify-self: center;
+  margin-top: 0.55rem;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 1.5px solid var(--moss);
+  position: relative;
+  z-index: 1;
+  transition: background 0.4s var(--ease), transform 0.4s var(--ease);
+
+  @media (max-width: 768px) {
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+  }
+}
+
+.job:hover .node {
+  background: var(--moss);
+  transform: scale(1.3);
+}
+
+.role {
+  font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+  margin-bottom: 0.3rem;
+}
+
+.company {
+  font-family: var(--font-script);
+  font-size: 1.9rem;
+  line-height: 1.2;
+  color: var(--clay);
+  margin-bottom: 1.2rem;
+}
+
+.duties {
+  list-style: none;
+  display: grid;
+  gap: 0.55rem;
+  max-width: 44rem;
+
   li {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.6rem;
-  }
+    position: relative;
+    padding-left: 1.4rem;
+    color: var(--ink-soft);
+    font-size: 0.96rem;
 
-  .bullet-arrow {
-    color: var(--primary);
-    font-size: 1rem;
-    line-height: 1.35;
-    text-shadow: 0 0 6px var(--primary);
-  }
-
-  .bullet-desc {
-    font-size: 0.95rem;
-    color: var(--text-muted);
-    line-height: 1.5;
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.78em;
+      width: 0.7rem;
+      height: 1px;
+      background: var(--sand);
+    }
   }
 }

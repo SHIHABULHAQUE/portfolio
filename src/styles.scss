@@ -1,50 +1,38 @@
 /* =========================================
-   1. GLOBAL GOOGLE FONTS & ANCHORS
+   1. FONTS & DESIGN TOKENS — "Forest & Ink"
    ========================================= */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Space+Grotesk:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Great+Vibes&family=Manrope:wght@300;400;500;600;700&display=swap');
 
 :root {
-  /* Absolute Obsidian Luxury Space Palette */
-  --bg-dark: #030303;      /* Absolute absorbing black */
-  --bg-card: rgba(10, 12, 16, 0.45); /* Highly transparent soot gray */
-  --bg-card-hover: rgba(16, 18, 24, 0.65);
-  
-  /* Dynamic Accents managed by ThemeService */
-  --primary: #00f0ff;      
-  --primary-rgb: 0, 240, 255;
-  --primary-glow: rgba(0, 240, 255, 0.25);
-  
-  --secondary: #64ffda;    
-  --secondary-rgb: 100, 255, 218;
-  --accent: #bd00ff;       
-  --accent-rgb: 189, 0, 255;
-  --accent-orange: #ff5e00;
-  
-  /* Silver & Slate Typographical Scales */
-  --text-main: #fcfcfc;    /* Pure nebula silver */
-  --text-muted: #94a3b8;   /* Soft star slate */
-  --text-dim: #475569;     
-  
-  /* Frosted Glass Properties */
-  --border-glass: rgba(255, 255, 255, 0.05);
-  --border-glass-active: rgba(var(--primary-rgb), 0.25);
-  --shadow-glass: 0 20px 45px rgba(0, 0, 0, 0.6);
-  
-  /* Typography Configuration */
-  --font-heading: 'Space Grotesk', -apple-system, sans-serif;
-  --font-serif: 'Playfair Display', Georgia, serif;
-  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
-  
-  /* Motion Constants */
-  --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
-  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-smooth: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  /* Paper & ink — palette lifted from the forest portrait */
+  --paper: #f4efe6;
+  --paper-2: #ebe3d4;
+  --paper-3: #e2d7c3;
+  --ink: #1c2a21;
+  --ink-2: #2b3d31;
+  --ink-soft: #55635a;
+  --ink-faint: #8a958d;
+  --moss: #5e7a4c;
+  --moss-soft: #a9b994;
+  --sand: #b89a74;
+  --clay: #8a6643;
+  --line: rgba(28, 42, 33, 0.14);
+  --line-strong: rgba(28, 42, 33, 0.32);
+
+  --font-script: 'Great Vibes', 'Brush Script MT', cursive;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Manrope', system-ui, -apple-system, sans-serif;
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --radius: 18px;
 }
 
 /* =========================================
-   2. SYSTEM BASE & RESET
+   2. RESET & BASE
    ========================================= */
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -54,221 +42,188 @@ html {
   scroll-behavior: auto !important;
 }
 
-html, body {
+html,
+body {
   min-height: 100%;
   width: 100%;
-  background-color: var(--bg-dark);
-  color: var(--text-main);
+  background-color: var(--paper);
+  color: var(--ink);
   font-family: var(--font-body);
-  line-height: 1.6;
+  font-size: 16px;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
 
-/* Custom Minimalist Scrollbar */
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+}
+
+::selection {
+  background: var(--ink);
+  color: var(--paper);
+}
+
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--bg-dark);
+  background: var(--paper);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.07);
-  border-radius: 3px;
-  transition: background 0.3s;
+  background: var(--paper-3);
+  border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--primary);
+  background: var(--sand);
 }
 
-/* =========================================
-   3. THEME OVERLAYS & AMBIENCE GLOWS
-   ========================================= */
+/* Subtle paper grain */
 .noise-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  inset: 0;
   z-index: 9999;
   pointer-events: none;
-  opacity: 0.025;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-}
-
-.aurora-bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -3;
-  pointer-events: none;
-  overflow: hidden;
-  filter: blur(140px);
-  opacity: 0.35;
-}
-
-.aurora-blob {
-  position: absolute;
-  border-radius: 50%;
-  mix-blend-mode: screen;
-  animation: aurora-drift 24s infinite alternate var(--ease-premium);
-}
-
-.aurora-blob.cyan {
-  width: 65vw;
-  height: 65vw;
-  background: radial-gradient(circle, rgba(var(--primary-rgb), 0.2) 0%, transparent 70%);
-  top: -10%;
-  left: -10%;
-}
-
-.aurora-blob.purple {
-  width: 60vw;
-  height: 60vw;
-  background: radial-gradient(circle, rgba(189, 0, 255, 0.15) 0%, transparent 70%);
-  bottom: -10%;
-  right: -5%;
-  animation-duration: 30s;
-}
-
-@keyframes aurora-drift {
-  0% { transform: translate(0, 0) scale(1) rotate(0deg); }
-  50% { transform: translate(8%, 5%) scale(1.1) rotate(180deg); }
-  100% { transform: translate(-5%, -8%) scale(0.9) rotate(360deg); }
-}
-
-.glass-panel {
-  background: var(--bg-card);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid var(--border-glass);
-  border-radius: 20px;
-  box-shadow: var(--shadow-glass);
-  transition: border-color var(--transition-smooth), background-color var(--transition-smooth), transform var(--transition-smooth);
-  
-  &:hover {
-    border-color: var(--border-glass-active);
-    background: var(--bg-card-hover);
-  }
+  opacity: 0.07;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 /* =========================================
-   4. LUXURY ASYMMETRICAL TYPOGRAPHY
+   3. TYPOGRAPHY
    ========================================= */
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  line-height: 1.1;
-  color: var(--text-main);
-  letter-spacing: -0.02em;
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  color: var(--ink);
 }
 
-.section-header {
-  margin-bottom: 6rem;
-  
-  &.centered {
-    text-align: center;
-  }
-}
-
-.section-subtitle {
-  font-size: 0.75rem;
-  font-weight: 700;
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
-  letter-spacing: 0.3em;
-  color: var(--primary);
-  margin-bottom: 1.25rem;
-  display: block;
+  color: var(--clay);
 }
 
-.section-title {
-  font-size: clamp(2.5rem, 6vw, 4.2rem);
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  background: linear-gradient(135deg, #ffffff 30%, rgba(255, 255, 255, 0.6) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-bottom: 2rem;
+.script {
+  font-family: var(--font-script);
+  font-weight: 400;
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* =========================================
+   4. LAYOUT
+   ========================================= */
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 3rem;
+  padding: 0 2.5rem;
   position: relative;
-  
+
   @media (max-width: 768px) {
-    padding: 0 1.5rem;
+    padding: 0 1.25rem;
   }
 }
 
 .section {
-  padding: 10rem 0;
+  padding: 8rem 0;
   position: relative;
-  
+
   @media (max-width: 768px) {
-    padding: 7rem 0;
+    padding: 5rem 0;
   }
 }
 
 /* =========================================
-   5. BUTTONS & CYBERNETIC DETAILS
+   5. BUTTONS
    ========================================= */
 .btn {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  padding: 1rem 2.5rem;
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 0.8rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  border-radius: 40px;
+  gap: 0.6rem;
+  padding: 0.95rem 1.8rem;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-decoration: none;
   cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  transition: all var(--transition-smooth);
   border: 1px solid transparent;
-}
+  transition: background 0.35s var(--ease), color 0.35s var(--ease), border-color 0.35s var(--ease), transform 0.35s var(--ease);
 
-.btn-primary {
-  background: #ffffff;
-  color: #030303;
-  box-shadow: 0 10px 25px rgba(255, 255, 255, 0.05);
-  
-  &:hover {
-    background: var(--primary);
-    color: #030303;
-    box-shadow: 0 15px 35px rgba(var(--primary-rgb), 0.3);
-    transform: translateY(-3px);
+  svg {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.35s var(--ease);
+  }
+
+  &:hover svg {
+    transform: translateX(3px);
   }
 }
 
-.btn-secondary {
-  background: rgba(255, 255, 255, 0.02);
-  color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(10px);
-  
+.btn-ink {
+  background: var(--ink);
+  color: var(--paper);
+
   &:hover {
-    border-color: var(--primary);
-    background: rgba(var(--primary-rgb), 0.05);
-    transform: translateY(-3px);
+    background: var(--moss);
+    transform: translateY(-2px);
   }
 }
 
-.text-glow-cyan {
-  text-shadow: 0 0 15px rgba(var(--primary-rgb), 0.45);
+.btn-outline {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--line-strong);
+
+  &:hover {
+    border-color: var(--ink);
+    background: rgba(28, 42, 33, 0.04);
+    transform: translateY(-2px);
+  }
 }
 
-.bracket-text::before {
-  content: '[ ';
-  color: var(--primary);
+/* =========================================
+   6. SCROLL REVEAL (only when JS is running)
+   ========================================= */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 1s var(--ease), transform 1s var(--ease);
+  transition-delay: var(--reveal-delay, 0s);
 }
-.bracket-text::after {
-  content: ' ]';
-  color: var(--primary);
+
+.js .reveal.in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }

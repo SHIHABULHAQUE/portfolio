@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './layout/header/header.component';
 import { GameComponent } from './features/game/game.component';
@@ -8,19 +7,39 @@ import { Title, Meta } from '@angular/platform-browser';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, HeaderComponent, GameComponent],
+  imports: [RouterOutlet, HeaderComponent, GameComponent],
   template: `
-    <app-header></app-header>
+    <app-header />
     <main>
-      <div class="bg-pixel-pattern"></div>
-      <router-outlet></router-outlet>
+      <router-outlet />
     </main>
-    <footer style="text-align: center; padding: 2rem; color: var(--text-dim); font-size: 0.85rem;">
-      <p>&copy; 2026 Mohammed Shihabul Haque. All rights reserved.</p>
+    <footer class="site-footer">
+      <span class="sig">Shihab</span>
+      <p>&copy; 2026 Mohammed Shihabul Haque · Crafted with care in Kerala</p>
     </footer>
-    <app-game></app-game>
+    <app-game />
   `,
-  styles: []
+  styles: [`
+    .site-footer {
+      background: var(--ink);
+      color: rgba(244, 239, 230, 0.55);
+      text-align: center;
+      padding: 0 1.25rem 3rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.04em;
+    }
+    .sig {
+      display: block;
+      font-family: var(--font-script);
+      font-size: 3.4rem;
+      line-height: 1.3;
+      color: var(--sand);
+      padding-top: 1rem;
+      border-top: 1px solid rgba(244, 239, 230, 0.1);
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+  `]
 })
 export class AppComponent {
   constructor(private title: Title, private meta: Meta) {
@@ -35,14 +54,14 @@ export class AppComponent {
       { property: 'og:url', content: 'https://shihabulhaque.in/' },
       { property: 'og:title', content: 'Mohammed Shihabul Haque | Senior Software Engineer' },
       { property: 'og:description', content: 'Portfolio of Mohammed Shihabul Haque - Senior Software Engineer & Team Lead specializing in Angular, .NET, and Modern Web Architecture.' },
-      { property: 'og:image', content: 'https://shihabulhaque.in/assets/images/preview-card.jpg' },
+      { property: 'og:image', content: 'https://shihabulhaque.in/assets/images/shihab.jpg' },
 
       // Twitter
       { property: 'twitter:card', content: 'summary_large_image' },
       { property: 'twitter:url', content: 'https://shihabulhaque.in/' },
       { property: 'twitter:title', content: 'Mohammed Shihabul Haque | Senior Software Engineer' },
       { property: 'twitter:description', content: 'Senior Software Engineer & Team Lead. Expert in Angular, .NET, and building scalable applications.' },
-      { property: 'twitter:image', content: 'https://shihabulhaque.in/assets/images/preview-card.jpg' }
+      { property: 'twitter:image', content: 'https://shihabulhaque.in/assets/images/shihab.jpg' }
     ]);
   }
 }

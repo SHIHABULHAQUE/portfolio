@@ -1,58 +1,26 @@
-<section class="section experience-section" id="experience">
-  <!-- Dynamic glow bubble -->
-  <div class="xp-glow"></div>
+<section class="section" id="experience">
+  <app-section-heading index="01" eyebrow="Where I've worked" title="Experience" script="journey" />
 
-  <div class="container">
-    <div class="section-header centered">
-      <span class="section-subtitle bracket-text">JOURNEY</span>
-      <h2 class="section-title">Professional Experience</h2>
-    </div>
-
-    <div class="timeline-container">
-      <!-- Glow active scrolling line -->
-      <div class="timeline-line-bg"></div>
-      <div class="timeline-progress-bar"></div>
-
-      <div class="timeline-list">
-        <div class="timeline-item" *ngFor="let job of experience; let i = index">
-          <!-- Timeline Node Point -->
-          <div class="timeline-node">
-            <span class="node-pulse"></span>
-          </div>
-
-          <!-- Timeline Glass Card -->
-          <div class="timeline-card glass-panel">
-            <div class="card-meta">
-              <span class="job-period">{{ job.period }}</span>
-              <span class="job-location">
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"></path>
-                  <circle cx="12" cy="10" r="3"></circle>
-                </svg>
-                {{ job.location }}
-              </span>
-            </div>
-            
-            <div class="card-header">
-              <h3 class="job-role">{{ job.role }}</h3>
-              <div class="job-company">
-                <span class="company-name text-gradient">{{ job.company }}</span>
-                <!-- Extra highlight tag for banking/finance leader role -->
-                <span class="banking-tag" *ngIf="job.company.includes('Muthootu') || job.company.includes('Geojit')">
-                  Banking & FinTech
-                </span>
-              </div>
-            </div>
-
-            <ul class="job-details">
-              <li *ngFor="let desc of job.description">
-                <span class="bullet-arrow">▹</span>
-                <span class="bullet-desc">{{ desc }}</span>
-              </li>
-            </ul>
-          </div>
+  <ol class="timeline">
+    @for (job of experience; track job.company; let i = $index) {
+      <li class="job" appReveal>
+        <div class="job-when">
+          <span class="period">{{ job.period }}</span>
+          <span class="place">{{ job.location }}</span>
         </div>
-      </div>
-    </div>
-  </div>
+
+        <span class="node" aria-hidden="true"></span>
+
+        <div class="job-body">
+          <h3 class="role">{{ job.role }}</h3>
+          <p class="company">{{ job.company }}</p>
+          <ul class="duties">
+            @for (desc of job.description; track desc) {
+              <li>{{ desc }}</li>
+            }
+          </ul>
+        </div>
+      </li>
+    }
+  </ol>
 </section>

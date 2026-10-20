@@ -1,46 +1,62 @@
-.education-section {
-  background: rgba(255, 255, 255, 0.02);
-}
-
-.section-title {
-  text-align: center;
-  margin-bottom: 3rem;
-}
-
-.education-grid {
-  display: flex;
-  flex-direction: column;
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1.5rem;
-  max-width: 800px;
-  margin: 0 auto;
 }
 
-.edu-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  padding: 1.5rem;
-  border-radius: 12px;
+.card {
   display: flex;
-  flex-direction: column;
-  transition: all 0.3s ease;
-
-  &:hover {
-    border-color: var(--secondary);
-  }
+  gap: 1.8rem;
+  align-items: flex-start;
+  padding: 2.2rem;
+  border-radius: var(--radius);
+  background: var(--paper-2);
+  border: 1px solid var(--line);
 }
 
-.degree {
-  font-size: 1.25rem;
-  color: var(--text-main);
-  margin-bottom: 0.25rem;
+.year {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 2.4rem;
+  line-height: 1;
+  color: var(--sand);
+}
+
+h3 {
+  font-size: 1.55rem;
+  margin-bottom: 0.4rem;
 }
 
 .field {
-  color: var(--secondary);
-  font-weight: 500;
-  margin-bottom: 0.5rem;
+  color: var(--moss);
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
 }
 
 .institution {
-  color: var(--text-muted);
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+.certs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.2rem;
+  margin-top: 2.5rem;
+}
+
+.cert {
+  font-family: var(--font-script);
+  font-size: 1.9rem;
+  line-height: 1.2;
+  color: var(--ink);
+
+  &:not(:last-child)::after {
+    content: '·';
+    margin-left: 1.2rem;
+    color: var(--sand);
+    font-family: var(--font-serif);
+  }
 }

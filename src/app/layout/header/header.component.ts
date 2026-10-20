@@ -1,373 +1,224 @@
-import { Component, HostListener, OnInit, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
-import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { gsap } from 'gsap';
+import { Component, HostListener, OnDestroy, afterNextRender, signal } from '@angular/core';
+
+interface NavLink {
+  id: string;
+  label: string;
+}
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, RouterModule],
   template: `
-    <header [class.scrolled]="isScrolled" [class.menu-open]="isMenuOpen">
-      <div class="header-container">
-        <!-- Logo -->
-        <a routerLink="/" class="logo bracket-text">
-          <span>SHIHAB</span>
-        </a>
+    <header [class.scrolled]="isScrolled()" [class.menu-open]="isMenuOpen()">
+      <div class="bar">
+        <a href="#hero" class="logo" (click)="scrollToSection($event, 'hero')" aria-label="Back to top">Shihab</a>
 
-        <!-- Mobile Hamburg Menu -->
-        <button class="mobile-toggle" (click)="toggleMenu()" aria-label="Toggle menu">
-          <span [class.open]="isMenuOpen"></span>
-          <span [class.open]="isMenuOpen"></span>
-          <span [class.open]="isMenuOpen"></span>
-        </button>
-
-        <!-- Navigation links -->
-        <nav [class.active]="isMenuOpen">
-          <a #navLink href="#hero" 
-             [class.active]="activeSection === 'hero'" 
-             (click)="scrollToSection($event, 'hero')"
-             (mousemove)="onMagneticMove($event)"
-             (mouseleave)="onMagneticLeave($event)">
-             <span>Home</span>
-          </a>
-          <a #navLink href="#experience" 
-             [class.active]="activeSection === 'experience'" 
-             (click)="scrollToSection($event, 'experience')"
-             (mousemove)="onMagneticMove($event)"
-             (mouseleave)="onMagneticLeave($event)">
-             <span>Experience</span>
-          </a>
-          <a #navLink href="#skills" 
-             [class.active]="activeSection === 'skills'" 
-             (click)="scrollToSection($event, 'skills')"
-             (mousemove)="onMagneticMove($event)"
-             (mouseleave)="onMagneticLeave($event)">
-             <span>Skills</span>
-          </a>
-          <a #navLink href="#projects" 
-             [class.active]="activeSection === 'projects'" 
-             (click)="scrollToSection($event, 'projects')"
-             (mousemove)="onMagneticMove($event)"
-             (mouseleave)="onMagneticLeave($event)">
-             <span>Projects</span>
-          </a>
-          <a #navLink href="#contact" 
-             [class.active]="activeSection === 'contact'" 
-             (click)="scrollToSection($event, 'contact')"
-             (mousemove)="onMagneticMove($event)"
-             (mouseleave)="onMagneticLeave($event)">
-             <span>Contact</span>
-          </a>
+        <nav [class.active]="isMenuOpen()" aria-label="Primary">
+          @for (link of links; track link.id; let i = $index) {
+            <a [href]="'#' + link.id"
+               [class.active]="activeSection() === link.id"
+               (click)="scrollToSection($event, link.id)">
+              <sup>0{{ i + 1 }}</sup>{{ link.label }}
+            </a>
+          }
+          <a class="cta" href="assets/resume.pdf" download>Résumé</a>
         </nav>
+
+        <button class="toggle" (click)="isMenuOpen.set(!isMenuOpen())" [attr.aria-expanded]="isMenuOpen()" aria-label="Toggle menu">
+          <span></span><span></span>
+        </button>
       </div>
     </header>
   `,
   styles: [`
     header {
       position: fixed;
-      top: 1.5rem;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 90%;
-      max-width: 850px;
+      inset: 0 0 auto 0;
       z-index: 1000;
-      border-radius: 40px;
-      background: rgba(10, 15, 26, 0.4);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
-      padding: 0.6rem 2rem;
-      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      padding: 1.4rem 0;
+      transition: padding 0.5s var(--ease), background 0.5s var(--ease), box-shadow 0.5s var(--ease);
     }
-
     header.scrolled {
-      top: 1rem;
-      background: rgba(5, 7, 10, 0.7);
-      border-color: rgba(0, 240, 255, 0.25);
-      box-shadow: 0 20px 50px rgba(0, 240, 255, 0.08);
-      max-width: 800px;
+      padding: 0.7rem 0;
+      background: rgba(244, 239, 230, 0.82);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 1px 0 var(--line);
     }
-
-    .header-container {
+    .bar {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2.5rem;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
     }
-
     .logo {
-      font-family: var(--font-heading);
-      font-size: 1.15rem;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      color: #ffffff;
+      font-family: var(--font-script);
+      font-size: 2.3rem;
+      line-height: 1;
+      color: var(--ink);
       text-decoration: none;
-      transition: text-shadow 0.3s;
+      transition: color 0.3s;
     }
-
-    .logo.bracket-text::before { content: '< '; color: var(--primary); }
-    .logo.bracket-text::after { content: ' />'; color: var(--primary); }
-    
-    .logo:hover {
-      text-shadow: 0 0 10px rgba(0, 240, 255, 0.6);
-    }
+    .logo:hover { color: var(--moss); }
 
     nav {
       display: flex;
-      gap: 0.5rem;
       align-items: center;
+      gap: 2rem;
     }
-
     nav a {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      text-decoration: none;
-      padding: 0.6rem 1.1rem;
-      border-radius: 20px;
-      transition: color 0.3s;
       position: relative;
-      display: inline-block;
-      
-      span {
-        position: relative;
-        z-index: 2;
-        pointer-events: none;
-      }
+      font-size: 0.86rem;
+      font-weight: 500;
+      color: var(--ink-soft);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    nav a sup {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 0.7rem;
+      color: var(--sand);
+      margin-right: 0.25rem;
+    }
+    nav a:not(.cta)::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -4px;
+      height: 1px;
+      background: var(--ink);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.5s var(--ease);
+    }
+    nav a:hover, nav a.active { color: var(--ink); }
+    nav a:hover::after, nav a.active::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+    .cta {
+      padding: 0.55rem 1.2rem;
+      border-radius: 999px;
+      border: 1px solid var(--line-strong);
+      color: var(--ink) !important;
+      transition: background 0.3s, color 0.3s !important;
+    }
+    .cta:hover {
+      background: var(--ink);
+      color: var(--paper) !important;
     }
 
-    nav a.active {
-      color: var(--primary);
-      background: rgba(0, 240, 255, 0.08);
-      box-shadow: inset 0 0 10px rgba(0, 240, 255, 0.05);
-      
-      &::after {
-        content: '';
-        position: absolute;
-        bottom: 4px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 12px;
-        height: 2px;
-        background: var(--primary);
-        border-radius: 2px;
-        box-shadow: 0 0 8px var(--primary);
-      }
-    }
-
-    nav a:hover:not(.active) {
-      color: #ffffff;
-      background: rgba(255, 255, 255, 0.03);
-    }
-
-    .mobile-toggle {
+    .toggle {
       display: none;
-      flex-direction: column;
-      justify-content: space-between;
-      width: 24px;
-      height: 18px;
+      width: 32px;
+      height: 32px;
       background: none;
       border: none;
       cursor: pointer;
-      z-index: 1001;
-      padding: 0;
+      position: relative;
+      z-index: 2;
     }
-
-    .mobile-toggle span {
-      display: block;
-      width: 100%;
-      height: 2px;
-      background-color: #ffffff;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      transform-origin: left center;
+    .toggle span {
+      position: absolute;
+      left: 4px;
+      right: 4px;
+      height: 1.5px;
+      background: var(--ink);
+      transition: transform 0.4s var(--ease), top 0.4s var(--ease);
     }
+    .toggle span:first-child { top: 12px; }
+    .toggle span:last-child { top: 19px; }
+    .menu-open .toggle span:first-child { top: 15px; transform: rotate(45deg); }
+    .menu-open .toggle span:last-child { top: 15px; transform: rotate(-45deg); }
 
-    .mobile-toggle span.open:nth-child(1) {
-      transform: rotate(45deg);
-      background-color: var(--primary);
-    }
-
-    .mobile-toggle span.open:nth-child(2) {
-      width: 0%;
-      opacity: 0;
-    }
-
-    .mobile-toggle span.open:nth-child(3) {
-      transform: rotate(-45deg);
-      background-color: var(--primary);
-    }
-
-    @media (max-width: 768px) {
-      header {
-        top: 1rem;
-        width: 92%;
-        border-radius: 24px;
-        padding: 0.8rem 1.5rem;
-      }
-      
+    @media (max-width: 860px) {
+      .bar { padding: 0 1.25rem; }
+      .toggle { display: block; }
+      /* backdrop-filter would make the fixed menu relative to the header */
       header.menu-open {
-        border-radius: 24px 24px 0 0;
-        background: rgba(5, 7, 10, 0.98);
-        border-bottom-color: transparent;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
       }
-
-      .mobile-toggle {
-        display: flex;
-      }
-
       nav {
-        position: absolute;
-        top: 100%;
-        left: -1px;
-        width: calc(100% + 2px);
-        background: rgba(5, 7, 10, 0.98);
-        backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-top: none;
-        border-radius: 0 0 24px 24px;
+        position: fixed;
+        inset: 0;
         flex-direction: column;
-        align-items: stretch;
-        padding: 1.5rem;
-        gap: 0.75rem;
-        transform: translateY(-20px);
+        justify-content: center;
+        gap: 1.6rem;
+        background: var(--paper);
         opacity: 0;
         visibility: hidden;
-        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        pointer-events: none;
+        transition: opacity 0.5s var(--ease), visibility 0.5s;
       }
-
       nav.active {
-        transform: translateY(0);
         opacity: 1;
         visibility: visible;
-        pointer-events: auto;
       }
-
       nav a {
-        text-align: center;
-        padding: 0.8rem;
-        border-radius: 12px;
-        font-size: 0.95rem;
+        font-family: var(--font-serif);
+        font-size: 2.2rem;
+        color: var(--ink);
       }
-      
-      nav a.active::after {
-        display: none;
-      }
+      .cta { font-family: var(--font-body) !important; font-size: 1rem !important; }
     }
   `]
 })
-export class HeaderComponent implements OnInit, OnDestroy {
-  isScrolled = false;
-  isMenuOpen = false;
-  activeSection = 'hero';
-  private observer!: IntersectionObserver;
+export class HeaderComponent implements OnDestroy {
+  links: NavLink[] = [
+    { id: 'experience', label: 'Experience' },
+    { id: 'skills', label: 'Skills' },
+    { id: 'projects', label: 'Work' },
+    { id: 'contact', label: 'Contact' }
+  ];
 
-  constructor(
-    @Inject(PLATFORM_ID) private platformId: Object
-  ) {}
+  isScrolled = signal(false);
+  isMenuOpen = signal(false);
+  activeSection = signal('hero');
+
+  private observer?: IntersectionObserver;
+
+  constructor() {
+    afterNextRender(() => this.observeSections());
+  }
 
   @HostListener('window:scroll')
-  onScroll() {
-    if (isPlatformBrowser(this.platformId)) {
-      this.isScrolled = window.scrollY > 50;
-    }
+  onScroll(): void {
+    this.isScrolled.set(window.scrollY > 40);
   }
 
-  ngOnInit() {
-    if (isPlatformBrowser(this.platformId)) {
-      this.setupIntersectionObserver();
-    }
+  ngOnDestroy(): void {
+    this.observer?.disconnect();
   }
 
-  ngOnDestroy() {
-    if (this.observer) {
-      this.observer.disconnect();
-    }
-  }
-
-  toggleMenu() {
-    this.isMenuOpen = !this.isMenuOpen;
-  }
-
-  closeMenu() {
-    this.isMenuOpen = false;
-  }
-
-  // Smooth Scroll Trigger
-  scrollToSection(event: Event, targetId: string) {
+  scrollToSection(event: Event, id: string): void {
     event.preventDefault();
-    this.closeMenu();
-    
-    if (isPlatformBrowser(this.platformId)) {
-      const targetElement = document.getElementById(targetId);
-      if (targetElement) {
-        const headerOffset = 90;
-        const elementPosition = targetElement.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
-        this.activeSection = targetId;
-      }
-    }
+    this.isMenuOpen.set(false);
+    const el = document.getElementById(id);
+    if (!el) return;
+    window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 70, behavior: 'smooth' });
+    this.activeSection.set(id);
   }
 
-  // Magnetic button hover animation
-  onMagneticMove(event: MouseEvent) {
-    if (isPlatformBrowser(this.platformId)) {
-      const link = event.currentTarget as HTMLElement;
-      const rect = link.getBoundingClientRect();
-      
-      const x = event.clientX - rect.left - rect.width / 2;
-      const y = event.clientY - rect.top - rect.height / 2;
-
-      gsap.to(link, {
-        x: x * 0.35,
-        y: y * 0.35,
-        duration: 0.3,
-        ease: 'power2.out'
-      });
+  private observeSections(attempt = 0): void {
+    // Home is lazy-loaded, so its sections may not be in the DOM yet.
+    if (!document.getElementById('contact')) {
+      if (attempt < 20) setTimeout(() => this.observeSections(attempt + 1), 250);
+      return;
     }
-  }
 
-  onMagneticLeave(event: MouseEvent) {
-    if (isPlatformBrowser(this.platformId)) {
-      const link = event.currentTarget as HTMLElement;
-      
-      gsap.to(link, {
-        x: 0,
-        y: 0,
-        duration: 0.6,
-        ease: 'elastic.out(1.1, 0.4)'
-      });
-    }
-  }
-
-  // Track scroll section entries
-  private setupIntersectionObserver() {
-    const options = {
-      root: null,
-      rootMargin: '-30% 0px -60% 0px',
-      threshold: 0
-    };
-
-    this.observer = new IntersectionObserver((entries) => {
+    this.observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          this.activeSection = entry.target.id;
-        }
+        if (entry.isIntersecting) this.activeSection.set(entry.target.id);
       });
-    }, options);
+    }, { rootMargin: '-35% 0px -60% 0px' });
 
-    const sections = ['hero', 'experience', 'skills', 'projects', 'contact'];
-    sections.forEach(id => {
+    ['hero', ...this.links.map(l => l.id)].forEach(id => {
       const el = document.getElementById(id);
-      if (el) {
-        this.observer.observe(el);
-      }
+      if (el) this.observer!.observe(el);
     });
   }
 }

@@ -1,142 +1,73 @@
-import { Component, OnInit, OnDestroy, Inject, PLATFORM_ID, signal, WritableSignal } from '@angular/core';
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { Component, OnDestroy, afterNextRender, signal } from '@angular/core';
 import { RESUME_DATA } from '../../../core/data/resume.data';
+import { CalligraphyComponent } from '../../../shared/components/calligraphy/calligraphy.component';
+import { PhotoRevealComponent } from '../../../shared/components/photo-reveal/photo-reveal.component';
 import { gsap } from 'gsap';
+import { whenPreloaderDone } from '../../../shared/utils/preloader';
 
 @Component({
   selector: 'app-hero',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CalligraphyComponent, PhotoRevealComponent],
   templateUrl: './hero.component.html',
   styleUrls: ['./hero.component.scss']
 })
-export class HeroComponent implements OnInit, OnDestroy {
+export class HeroComponent implements OnDestroy {
   data = RESUME_DATA.profile;
 
-  // Typewriter target values
-  typewriterText1 = 'BUILDING ENTERPRISE SOFTWARE';
-  typewriterText2 = 'THAT POWERS MILLIONS OF USERS';
+  /** True once the portrait has been revealed — shows the hand-written hello. */
+  arrived = signal(false);
 
-  // Signals-driven UI states
-  display1 = signal('');
-  display2 = signal('');
+  private ctx?: gsap.Context;
+  private onPointer?: (e: PointerEvent) => void;
 
-  isCursor1Blinking = signal(false);
-  isCursor2Blinking = signal(false);
-
-  private typewriterIntervals: any[] = [];
-
-  constructor(
-    @Inject(PLATFORM_ID) private platformId: Object
-  ) {}
-
-  ngOnInit(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      // 1. Stagger initial page entry
-      this.initGSAPAnimations();
-
-      // 2. Start typewriter loops
-      this.startTypewriterFlow();
-    }
+  constructor() {
+    afterNextRender(() => this.animate());
   }
 
   ngOnDestroy(): void {
-    this.typewriterIntervals.forEach(interval => clearInterval(interval));
+    this.ctx?.revert();
+    if (this.onPointer) window.removeEventListener('pointermove', this.onPointer);
   }
 
-  private initGSAPAnimations(): void {
-    gsap.from('.hero-badge', {
-      opacity: 0,
-      y: -25,
-      duration: 0.8,
-      ease: 'power3.out'
-    });
-
-    gsap.from('.hero-title', {
-      opacity: 0,
-      y: 40,
-      duration: 1.2,
-      delay: 0.15,
-      ease: 'power3.out'
-    });
-
-    gsap.from('.hero-tech-list', {
-      opacity: 0,
-      y: 20,
-      duration: 1.0,
-      delay: 1.1,
-      ease: 'power3.out'
-    });
-
-    gsap.from('.cta-wrapper', {
-      opacity: 0,
-      y: 15,
-      duration: 0.8,
-      delay: 1.3,
-      ease: 'power3.out'
-    });
-
-    gsap.from('.glass-terminal', {
-      opacity: 0,
-      x: 50,
-      rotateY: -25,
-      duration: 1.4,
-      delay: 0.4,
-      ease: 'power3.out'
-    });
-  }
-
-  private async startTypewriterFlow() {
-    this.isCursor1Blinking.set(false);
-    this.isCursor2Blinking.set(false);
-
-    await this.delay(500);
-
-    // Type first phrase
-    await this.typeEffect(this.typewriterText1, this.display1, 40);
-    this.isCursor1Blinking.set(true);
-    
-    await this.delay(400);
-    this.isCursor1Blinking.set(false);
-
-    // Type second phrase
-    await this.typeEffect(this.typewriterText2, this.display2, 30);
-    this.isCursor2Blinking.set(true);
-  }
-
-  private typeEffect(text: string, writeSignal: WritableSignal<string>, speed: number): Promise<void> {
-    return new Promise(resolve => {
-      let index = 0;
-      const interval = setInterval(() => {
-        writeSignal.set(text.substring(0, index + 1));
-        index++;
-        if (index >= text.length) {
-          clearInterval(interval);
-          resolve();
-        }
-      }, speed);
-      this.typewriterIntervals.push(interval);
-    });
-  }
-
-  private delay(ms: number): Promise<void> {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
-
-  scrollToSection(event: Event, targetId: string): void {
+  scrollTo(event: Event, id: string): void {
     event.preventDefault();
-    if (isPlatformBrowser(this.platformId)) {
-      const targetElement = document.getElementById(targetId);
-      if (targetElement) {
-        const headerOffset = 90;
-        const elementPosition = targetElement.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+    const el = document.getElementById(id);
+    if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 70, behavior: 'smooth' });
+  }
 
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
-      }
-    }
+  private animate(): void {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    this.ctx = gsap.context(() => {
+      // Built paused so the "from" states apply now, but motion starts once the preloader lifts.
+      const tl = gsap.timeline({ paused: true, defaults: { ease: 'power3.out' } });
+      whenPreloaderDone().then(() => tl.play());
+      tl.from('.disc', { scale: 0.4, opacity: 0, duration: 1.4, ease: 'expo.out' })
+        .from('.ring', { opacity: 0, duration: 1.2 }, 0.5)
+        .from('.chip', { opacity: 0, scale: 0.7, y: 20, duration: 0.9, stagger: 0.15, ease: 'back.out(1.8)' }, 1.4)
+        .from('.hero-eyebrow, .name-first', { opacity: 0, y: 24, duration: 1, stagger: 0.12 }, 0.4)
+        .to('.flourish path', { strokeDashoffset: 0, duration: 1.6, ease: 'power2.inOut' }, 2.6)
+        .from('.hero-role, .hero-summary, .hero-actions, .hero-meta li', { opacity: 0, y: 22, duration: 0.9, stagger: 0.1 }, 2.2)
+        .from('.badge, .badge-core', { opacity: 0, scale: 0.6, duration: 1, ease: 'back.out(1.6)' }, 2.6)
+        .from('.scroll-cue', { opacity: 0, duration: 1 }, 3.4);
+    });
+
+    // Depth parallax: each layer drifts with the pointer by its data-depth
+    const layers = Array.from(document.querySelectorAll<HTMLElement>('.hero-visual .layer')).map(el => ({
+      depth: Number(el.dataset['depth'] ?? 1),
+      x: gsap.quickTo(el, 'x', { duration: 0.9, ease: 'power3.out' }),
+      y: gsap.quickTo(el, 'y', { duration: 0.9, ease: 'power3.out' })
+    }));
+    this.onPointer = (e: PointerEvent) => {
+      if (e.pointerType !== 'mouse') return;
+      const dx = e.clientX / window.innerWidth - 0.5;
+      const dy = e.clientY / window.innerHeight - 0.5;
+      layers.forEach(l => {
+        l.x(dx * 14 * l.depth);
+        l.y(dy * 10 * l.depth);
+      });
+    };
+    window.addEventListener('pointermove', this.onPointer, { passive: true });
   }
 }

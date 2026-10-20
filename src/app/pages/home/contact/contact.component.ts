@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RESUME_DATA } from '../../../core/data/resume.data';
+import { SectionHeadingComponent } from '../../../shared/components/section-heading/section-heading.component';
+import { RevealDirective } from '../../../shared/directives/reveal.directive';
 
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [FormsModule, SectionHeadingComponent, RevealDirective],
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.scss']
 })
@@ -19,28 +20,17 @@ export class ContactComponent {
     message: ''
   };
 
-  isSubmitted = false;
-  isLoading = false;
+  isSubmitted = signal(false);
 
+  /** Opens the visitor's mail client with the letter pre-filled. */
   onSubmit(event: Event): void {
     event.preventDefault();
-    if (!this.formData.name || !this.formData.email || !this.formData.message) return;
+    const { name, email, message } = this.formData;
+    if (!name || !email || !message) return;
 
-    this.isLoading = true;
-
-    // Simulate encrypted API transfer
-    setTimeout(() => {
-      this.isLoading = false;
-      this.isSubmitted = true;
-    }, 1500);
-  }
-
-  resetForm(): void {
-    this.formData = {
-      name: '',
-      email: '',
-      message: ''
-    };
-    this.isSubmitted = false;
+    const subject = encodeURIComponent(`Hello from ${name}`);
+    const body = encodeURIComponent(`${message}\n\n— ${name}\n${email}`);
+    window.location.href = `mailto:${this.profile.email}?subject=${subject}&body=${body}`;
+    this.isSubmitted.set(true);
   }
 }
