@@ -13,29 +13,30 @@
     position: fixed;
     bottom: 1.8rem;
     right: 1.8rem;
-    width: 54px;
-    height: 54px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     background: var(--ink);
-    border: 1px solid var(--sand);
+    border: 1px solid rgba(238, 234, 225, 0.35);
     color: var(--paper);
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     z-index: 1000;
-    box-shadow: 0 14px 30px -10px rgba(28, 42, 33, 0.6);
+    box-shadow: 0 10px 28px -10px rgba(18, 18, 16, 0.5);
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 
     &:hover {
-        transform: scale(1.1) rotate(12deg);
-        background: var(--moss);
-        border-color: var(--moss);
+        transform: scale(1.06);
+        background: var(--accent);
+        border-color: var(--accent);
+        color: var(--ink);
     }
 
     svg {
-        width: 24px;
-        height: 24px;
+        width: 22px;
+        height: 22px;
     }
 
     .pulse {
@@ -43,8 +44,8 @@
         width: 100%;
         height: 100%;
         border-radius: 50%;
-        border: 1px solid var(--sand);
-        animation: joystick-pulse 2.4s infinite;
+        border: 1px solid var(--ink);
+        animation: joystick-pulse 5s infinite;
         opacity: 0;
     }
 }

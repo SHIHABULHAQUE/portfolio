@@ -1,45 +1,53 @@
 <section class="section" id="projects">
-  <app-section-heading index="04" eyebrow="Selected work" title="Projects" script="stories" />
+  <div class="container">
+    <app-section-heading index="03" label="Projects" title="Enterprise systems, *measured in results.*"
+      intro="Six platforms across finance, banking, lending and e-learning. Open any card for the problem, the approach and the outcome." />
 
-  <ol class="list">
-    @for (project of projects; track project.title; let i = $index) {
-      <li class="project" [class.open]="expandedIndex() === i" appReveal>
-        <button class="row" (click)="toggle(i)" [attr.aria-expanded]="expandedIndex() === i" [attr.aria-controls]="'case-' + i">
-          <span class="num">{{ (i + 1 < 10 ? '0' : '') + (i + 1) }}</span>
-          <span class="title">{{ project.title }}</span>
-          <span class="tags">
+    <ol class="grid">
+      @for (project of projects; track project.title; let i = $index) {
+        <li class="card" [class.open]="open() === i" appSpotlight [tilt]="5" [appReveal]="(i % 3) * 0.07">
+          <header>
+            <span class="mono mute">{{ project.category }}</span>
+            <span class="mono idx">0{{ i + 1 }}</span>
+          </header>
+
+          <p class="metric">
+            <span class="figure grad">{{ project.metric }}</span>
+            <span class="mute">{{ project.metricLabel }}</span>
+          </p>
+
+          <h3>{{ project.title }}</h3>
+          <p class="desc">{{ project.description }}</p>
+
+          <ul class="stack">
             @for (tech of project.technologies; track tech) {
-              <span>{{ tech }}</span>
+              <li class="chip">{{ tech }}</li>
             }
-          </span>
-          <span class="toggle" aria-hidden="true"></span>
-        </button>
+          </ul>
 
-        <div class="case" [id]="'case-' + i">
-          <div class="case-inner">
-            <p class="desc">{{ project.description }}</p>
-
-            <dl class="facts">
+          <div class="study" [id]="'study-' + i" [attr.inert]="open() === i ? null : ''">
+            <dl>
               <div>
-                <dt>The challenge</dt>
+                <dt class="mono">Problem</dt>
                 <dd>{{ project.challenge }}</dd>
               </div>
               <div>
-                <dt>The approach</dt>
+                <dt class="mono">Approach</dt>
                 <dd>{{ project.solution }}</dd>
               </div>
               <div>
-                <dt>Architecture</dt>
-                <dd>{{ project.architecture }}</dd>
-              </div>
-              <div class="impact">
-                <dt>Impact</dt>
+                <dt class="mono">Outcome</dt>
                 <dd>{{ project.impact }}</dd>
               </div>
             </dl>
           </div>
-        </div>
-      </li>
-    }
-  </ol>
+
+          <button type="button" class="more" (click)="toggle(i)" [attr.aria-expanded]="open() === i" [attr.aria-controls]="'study-' + i">
+            <span>{{ open() === i ? 'Hide case study' : 'Read case study' }}</span>
+            <span class="plus" aria-hidden="true"></span>
+          </button>
+        </li>
+      }
+    </ol>
+  </div>
 </section>

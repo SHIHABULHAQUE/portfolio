@@ -1,13 +1,13 @@
 import { Directive, ElementRef, Input, OnDestroy, afterNextRender } from '@angular/core';
 
-/** Fades/slides an element in once it scrolls into view. Styles live in styles.scss (.reveal). */
+/** Adds `.in` once the element scrolls into view. The motion itself lives in styles.scss (.reveal). */
 @Directive({
   selector: '[appReveal]',
   standalone: true,
   host: { class: 'reveal' }
 })
 export class RevealDirective implements OnDestroy {
-  /** Optional stagger delay in seconds. */
+  /** Optional delay in seconds. */
   @Input() appReveal: number | '' = '';
 
   private observer?: IntersectionObserver;
@@ -15,14 +15,14 @@ export class RevealDirective implements OnDestroy {
   constructor(private el: ElementRef<HTMLElement>) {
     afterNextRender(() => {
       const node = this.el.nativeElement;
-      if (this.appReveal !== '') node.style.setProperty('--reveal-delay', `${this.appReveal}s`);
+      if (this.appReveal !== '') node.style.setProperty('--d', `${this.appReveal}s`);
 
       this.observer = new IntersectionObserver(entries => {
         if (entries.some(e => e.isIntersecting)) {
           node.classList.add('in');
           this.observer?.disconnect();
         }
-      }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+      }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
       this.observer.observe(node);
     });
   }

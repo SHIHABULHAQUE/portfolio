@@ -1,77 +1,42 @@
 import { Component, Input } from '@angular/core';
-import { CalligraphyComponent } from '../calligraphy/calligraphy.component';
 import { RevealDirective } from '../../directives/reveal.directive';
 
+/** Section opener: numbered mono label, a title whose *starred* words take the gradient, optional intro. */
 @Component({
   selector: 'app-section-heading',
   standalone: true,
-  imports: [CalligraphyComponent, RevealDirective],
+  imports: [RevealDirective],
   template: `
-    <div class="heading" [class.light]="light" appReveal>
-      <div class="meta">
-        <span class="index">{{ index }}</span>
-        <span class="rule"></span>
-        <span class="eyebrow">{{ eyebrow }}</span>
-      </div>
+    <header class="sh" appReveal>
+      <p class="mono tag"><span class="line"></span>{{ index }} / {{ label }}</p>
       <h2>
-        {{ title }}
-        <app-calligraphy class="script-word" [text]="script" trigger="view" [delay]="0.3" />
+        @for (part of parts; track $index) {
+          <span [class.grad]="part.em">{{ part.text }}</span>
+        }
       </h2>
-    </div>
+      @if (intro) {
+        <p class="intro mute">{{ intro }}</p>
+      }
+    </header>
   `,
   styles: [`
-    .heading {
-      margin-bottom: 4.5rem;
-    }
-    .meta {
-      display: flex;
-      align-items: center;
-      gap: 0.9rem;
-      margin-bottom: 1.4rem;
-    }
-    .index {
-      font-family: var(--font-serif);
-      font-style: italic;
-      font-size: 1.1rem;
-      color: var(--ink-soft);
-    }
-    .rule {
-      width: 48px;
-      height: 1px;
-      background: var(--line-strong);
-    }
-    h2 {
-      font-size: clamp(2.6rem, 6vw, 4.6rem);
-      display: flex;
-      flex-wrap: wrap;
-      align-items: baseline;
-      column-gap: 0.4em;
-    }
-    .script-word {
-      height: 1.25em;
-      color: var(--moss);
-      transform: translateY(0.28em) rotate(-4deg);
-      transform-origin: left center;
-    }
-    .light h2,
-    .light .index {
-      color: var(--paper);
-    }
-    .light .rule {
-      background: rgba(244, 239, 230, 0.35);
-    }
-    .light .eyebrow {
-      color: var(--sand);
-    }
-    .light .script-word {
-      color: var(--moss-soft);
-    }
+    :host { display: block; }
+    .sh { max-width: 46rem; margin-bottom: clamp(2.25rem, 5vw, 3.5rem); }
+    .tag { display: flex; align-items: center; gap: 0.75rem; color: var(--c1); margin-bottom: 1rem; }
+    .line { width: 2.25rem; height: 1px; background: var(--grad); }
+    h2 { font-size: clamp(2rem, 4.6vw, 3.4rem); }
+    .intro { margin-top: 1rem; font-size: 1.08rem; max-width: 38rem; }
   `]
 })
 export class SectionHeadingComponent {
-  @Input() index = '';
-  @Input() eyebrow = '';
-  @Input() title = '';
-  @Input() script = '';
-  @Input() light = false;
+  @Input({ required: true }) index = '';
+  @Input({ required: true }) label = '';
+  @Input() intro = '';
+
+  parts: Array<{ text: string; em: boolean }> = [];
+
+  @Input({ required: true }) set title(value: string) {
+    // "Plain *highlighted* plain" -> alternating plain / gradient runs
+    this.parts = value.split('*').map((text, i) => ({ text, em: i % 2 === 1 })).filter(part => part.text);
+  }
 }

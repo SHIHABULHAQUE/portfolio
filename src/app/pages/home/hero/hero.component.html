@@ -1,85 +1,64 @@
-<section class="hero" id="hero">
-  <div class="container hero-grid">
-    <!-- Copy -->
-    <div class="hero-copy">
-      <p class="eyebrow hero-eyebrow">Hello, I'm</p>
+<section class="hero">
+  <div class="container inner">
+    <a class="status rise" style="--d: 0.1s" href="#contact" (click)="go($event, 'contact')">
+      <span class="dot" aria-hidden="true"></span>
+      Open to senior &amp; lead roles
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+    </a>
 
-      <h1 class="hero-name">
-        <span class="sr-only">{{ data.name }} — {{ data.role }}</span>
-        <span class="name-first" aria-hidden="true">Mohammed</span>
-        <app-calligraphy class="name-script" text="Shihabul Haque" trigger="load" [delay]="0.9" [pace]="0.2" aria-hidden="true" />
-        <svg class="flourish" viewBox="0 0 420 40" aria-hidden="true">
-          <path pathLength="1" d="M6 26 C 80 8, 150 34, 220 20 S 350 4, 414 18 M 300 30 C 330 24, 360 28, 392 22" />
-        </svg>
-      </h1>
+    <h1 class="rise" style="--d: 0.18s">
+      <span class="hello">Hi, I’m</span>
+      {{ first }} <span class="grad">{{ rest }}</span>
+    </h1>
 
-      <p class="hero-role">
-        Senior Software Engineer <em>&amp;</em> Team Lead
-      </p>
+    <p class="role rise" style="--d: 0.26s">
+      {{ data.role }}
+      <span class="sep" aria-hidden="true">/</span>
+      <span class="ticker" aria-hidden="true">
+        <span class="reel">
+          @for (word of words; track $index) {
+            <span>{{ word }}</span>
+          }
+        </span>
+      </span>
+      <span class="sr-only">{{ words.slice(0, -1).join(', ') }}</span>
+    </p>
 
-      <p class="hero-summary">
-        I design and lead the build of calm, dependable enterprise software — banking platforms,
-        ERPs and back-office tools — with Angular, .NET and SQL, for over five years.
-      </p>
+    <p class="lede rise" style="--d: 0.34s">
+      I lead the teams that build the software finance runs on: ERP platforms, lending engines and
+      fund back-offices. {{ data.years }}+ years of shipping with Angular, .NET and SQL.
+    </p>
 
-      <div class="hero-actions">
-        <a href="#projects" class="btn btn-ink" (click)="scrollTo($event, 'projects')">
-          See my work
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+    <div class="cta rise" style="--d: 0.42s">
+      <a class="btn btn-glow" href="#projects" (click)="go($event, 'projects')" [appMagnetic]="0.2">
+        See my work
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+      </a>
+      <a class="btn" href="assets/resume.pdf" download="Mohammed-Shihabul-Haque-Resume.pdf" [appMagnetic]="0.2">
+        Download résumé
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 4v13M6 11l6 6 6-6M5 20h14" /></svg>
+      </a>
+      <span class="social">
+        <a [href]="data.social.linkedin" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.5 8.5h-3V20h3V8.5ZM5 3.5a1.75 1.75 0 1 0 0 3.5 1.75 1.75 0 0 0 0-3.5ZM20.5 13.2c0-3-1.6-4.9-4.2-4.9-1.4 0-2.3.7-2.8 1.4V8.5h-3V20h3v-6.1c0-1.4.6-2.6 2-2.6s1.9 1.1 1.9 2.6V20h3.1v-6.8Z" /></svg>
         </a>
-        <a href="assets/resume.pdf" class="btn btn-outline" download>Download résumé</a>
-      </div>
-
-      <ul class="hero-meta">
-        <li><span>5.6+</span> years crafting</li>
-        <li><span>Angular</span> v2 — 18</li>
-        <li><span>Kerala</span> India</li>
-      </ul>
+        <a [href]="data.social.github" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" /></svg>
+        </a>
+      </span>
     </div>
 
-    <!-- Portrait -->
-    <div class="hero-visual">
-      <div class="layer disc-layer" data-depth="0.4">
-        <div class="ring" aria-hidden="true"></div>
-        <div class="disc" aria-hidden="true">
-          <app-calligraphy class="backdrop-script" text="Shihab" trigger="load" [delay]="1.2" [pace]="0.35" />
-        </div>
-      </div>
-
-      <div class="layer figure-layer" data-depth="1">
-        <app-photo-reveal class="portrait" (arrived)="arrived.set(true)" />
-      </div>
-
-      @if (arrived()) {
-        <div class="hello" aria-hidden="true">
-          <app-calligraphy class="hello-word" text="hello!" trigger="view" [pace]="0.28" />
-          <svg class="hello-arrow" viewBox="0 0 90 60">
-            <path pathLength="1" d="M8 8 C 30 4, 58 14, 66 42 M 56 34 L 67 45 L 74 31" />
-          </svg>
-        </div>
+    <ul class="stats rise" style="--d: 0.5s">
+      @for (fact of facts; track fact.label) {
+        <li class="card">
+          <span class="num grad">{{ fact.prefix }}<span [appCountUp]="fact.to">{{ fact.to }}</span>{{ fact.suffix }}</span>
+          <span class="mute">{{ fact.label }}</span>
+        </li>
       }
-
-      <div class="layer chips" data-depth="1.8" aria-hidden="true">
-        <span class="chip chip-1"><i></i>Angular</span>
-        <span class="chip chip-2"><i></i>.NET</span>
-        <span class="chip chip-3"><i></i>Team Lead</span>
-      </div>
-
-      <svg class="badge" viewBox="0 0 200 200" aria-hidden="true">
-        <defs>
-          <path id="badge-circle" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0" />
-        </defs>
-        <circle cx="100" cy="100" r="96" />
-        <text>
-          <textPath href="#badge-circle">Angular · .NET · SQL · Team Lead · Architect ·</textPath>
-        </text>
-      </svg>
-      <span class="badge-core script">S</span>
-    </div>
+    </ul>
   </div>
 
-  <a href="#experience" class="scroll-cue" (click)="scrollTo($event, 'experience')" aria-label="Scroll to experience">
-    <span>scroll</span>
-    <i></i>
+  <a class="scroll" href="#about" (click)="go($event, 'about')" aria-label="Scroll to about">
+    <span class="mouse" aria-hidden="true"></span>
   </a>
 </section>

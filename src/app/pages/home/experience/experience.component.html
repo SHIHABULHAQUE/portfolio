@@ -1,26 +1,32 @@
 <section class="section" id="experience">
-  <app-section-heading index="01" eyebrow="Where I've worked" title="Experience" script="journey" />
+  <div class="container">
+    <app-section-heading index="02" label="Experience" title="Six years, *four teams,* one direction." />
 
-  <ol class="timeline">
-    @for (job of experience; track job.company; let i = $index) {
-      <li class="job" appReveal>
-        <div class="job-when">
-          <span class="period">{{ job.period }}</span>
-          <span class="place">{{ job.location }}</span>
-        </div>
+    <ol class="timeline">
+      <li class="rail" aria-hidden="true"><span class="fill"></span></li>
 
-        <span class="node" aria-hidden="true"></span>
+      @for (job of jobs; track job.company) {
+        <li class="stop" appReveal>
+          <span class="node" [class.live]="job.current" aria-hidden="true"></span>
 
-        <div class="job-body">
-          <h3 class="role">{{ job.role }}</h3>
-          <p class="company">{{ job.company }}</p>
-          <ul class="duties">
-            @for (desc of job.description; track desc) {
-              <li>{{ desc }}</li>
-            }
-          </ul>
-        </div>
-      </li>
-    }
-  </ol>
+          <div class="when">
+            <span class="mono">{{ job.from }} — {{ job.to }}</span>
+            <span class="mute">{{ job.location }}</span>
+          </div>
+
+          <article class="card" appSpotlight>
+            <header>
+              <h3>{{ job.role }}</h3>
+              <p class="company grad">{{ job.company }}</p>
+            </header>
+            <ul>
+              @for (point of job.description; track point) {
+                <li>{{ point }}</li>
+              }
+            </ul>
+          </article>
+        </li>
+      }
+    </ol>
+  </div>
 </section>

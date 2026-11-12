@@ -4,8 +4,9 @@ export const RESUME_DATA = {
         role: 'Senior Software Engineer & Team Lead',
         phone: '+91 9895113071',
         email: 'shihabvmh51@gmail.com',
-        location: 'Pattambi, India 679303',
-        summary: 'Strategic Lead with 5.6 years of experience specializing in architecting scalable front-end solutions and leading high-performing Agile teams. Expert in Angular (v2–18) and modern JavaScript ecosystems, with a proven ability to translate complex business objectives into robust technical roadmaps. Focused on optimizing product functionality and mentoring cross-functional teams to deliver enterprise-grade software that prioritizes user experience and system performance.',
+        location: 'Pattambi, Kerala, India 679303',
+        years: 6,
+        summary: 'Senior Software Engineer and Team Lead with 6+ years of experience building scalable front-end and back-end web applications with Angular (v2–21), .NET, TypeScript and SQL. Leads Agile development teams, translates business requirements into technical roadmaps, and delivers enterprise applications in finance, ERP and e-learning domains. Focused on performance optimization, clean code, and mentoring cross-functional teams to ship reliable, user-friendly software.',
         social: {
             linkedin: 'https://www.linkedin.com/in/mohammed-shihabul-haque/',
             github: 'https://github.com/SHIHABULHAQUE'
@@ -13,15 +14,15 @@ export const RESUME_DATA = {
     },
     experience: [
         {
-            company: 'Muthootu Mini',
-            location: 'Kochi',
+            company: 'Muthoottu Mini',
+            location: 'Kochi, India',
             role: 'Senior Software Engineer (Team Lead)',
             period: '07/2025 - Current',
             description: [
-                'Led a team of software developers in designing, implementing, and maintaining complex software solutions, enhancing product functionality and user experience.',
-                'Refined and upgraded existing software to continuously improve performance.',
-                'Collaborated with cross-functional teams to gather requirements, specify system functionalities, and develop robust software architectures.',
-                'Coordinated with product managers to define clear project scopes, ensuring alignment with business goals and objectives.'
+                'Lead a team of software developers in designing, implementing and maintaining complex Angular and .NET solutions, improving product functionality and user experience.',
+                'Refactor and upgrade existing applications to continuously improve performance and maintainability.',
+                'Collaborate with cross-functional teams to gather requirements, define system functionality and design robust software architectures.',
+                'Work with product managers to define project scope and keep delivery aligned with business goals.'
             ]
         },
         {
@@ -30,14 +31,11 @@ export const RESUME_DATA = {
             role: 'Senior Software Engineer',
             period: '12/2022 - 06/2025',
             description: [
-                'Translated business requirements into technical specifications and implementations.',
-                'Debugging issues in the application code to ensure it is working correctly.',
-                'Developed, maintained and released web related user interfaces and prepared systems design documentation.',
-                'Leading angular project development.',
-                'Researched, analyzed, and developed product features of increasingly complex nature.',
-                'Wrote clean, maintainable, and efficient code following best practices and coding standards.',
-                'Used version control systems like Git to manage and track changes to code.',
-                'Working on two major projects: an ERP application using Angular 15.'
+                'Led Angular development for an enterprise ERP application (Finance & Trading modules) built on Angular 15.',
+                'Translated business requirements into technical specifications, system design documentation and working features.',
+                'Developed, maintained and released web user interfaces; researched and built increasingly complex product features.',
+                'Debugged and resolved application issues to ensure stable, reliable releases.',
+                'Wrote clean, maintainable and efficient code following best practices, and managed source code with Git.'
             ]
         },
         {
@@ -46,53 +44,59 @@ export const RESUME_DATA = {
             role: 'Software Engineer',
             period: '08/2021 - 12/2022',
             description: [
-                'Developed new, efficient and well-tested code for a variety of different software projects.',
-                'Collaborated with designers and product managers to develop innovative products.',
-                'Database handling using SQL.',
-                'Creating jasper reports.',
-                'Using Gitlab.',
-                'Worked on 4+ projects with various version of angular 7,10,13.'
+                'Delivered 4+ financial software projects using Angular 7, 10 and 13, including a Mutual Fund Back-Office application and a Loan Against Shares (LAS) system.',
+                'Developed new, efficient and well-tested code across multiple projects.',
+                'Designed and managed SQL databases and built business reports using Jasper Reports.',
+                'Collaborated with designers and product managers to build new product features; managed code with GitLab.'
             ]
         },
         {
             company: 'Iroid Technologies',
-            location: 'Kochi',
+            location: 'Kochi, India',
             role: 'Angular Developer',
             period: '07/2020 - 08/2021',
             description: [
-                'Developed user interfaces with the latest front-end technologies.',
+                'Built responsive user interfaces with Angular and modern front-end technologies, including the iROHUB E-Learning application.',
                 'Improved web design and usability through UX testing.',
-                'Ensured that all code complies with best practices and standards set by the company or organization.',
-                'Designing, coding, testing, and deploying the application.',
-                'Identify and resolve bugs and issues in the web applications.',
-                'Work with cross-functional teams, including designers and backend developers, to ensure seamless integration and functionality.'
+                'Designed, coded, tested and deployed applications in line with company coding standards.',
+                'Identified and fixed bugs, and worked with designers and back-end developers to ensure seamless integration.'
             ]
         }
     ],
     education: [
         {
-            degree: 'Bachelor of Computer Application (BCA)',
+            degree: 'Bachelor of Computer Applications (BCA)',
             field: 'Computer Science',
-            institution: 'MES KVM College, Valanchery',
+            institution: 'MES KVM College, Valanchery, Kerala',
             year: '2019'
         },
         {
             degree: 'Higher Secondary Education',
             field: 'Computer Science',
-            institution: 'GHSS - Pattambi',
+            institution: 'GHSS Pattambi, Kerala',
             year: '2016'
+        },
+        {
+            degree: 'High School (SSLC)',
+            field: '',
+            institution: 'Majlis HSS Vengad, Valanchery, Kerala',
+            year: ''
         }
     ],
     skills: [
-        'Angular (v2-18)', 'TypeScript', 'JavaScript', 'HTML5', 'CSS3/SCSS',
-        'RxJS', 'NgRx', 'Azure DevOps', 'Git/GitLab', 'Jira',
-        'Angular Material', 'PrimeNG', 'Ant Design', 'Syncfusion', 'Bootstrap',
-        'Dot Net', 'SQL', 'Jasper Reports', 'CI/CD Pipeline', 'Agile/Scrum',
-        'Team Leadership', 'Performance Monitoring', 'Unit Testing'
+        { title: 'Front-end', icon: 'assets/icons/angular.svg', items: ['Angular (7, 10, 13, 15, 17, up to 21)', 'TypeScript', 'JavaScript', 'HTML5', 'CSS3', 'Bootstrap', 'jQuery'] },
+        { title: 'UI libraries', icon: '', items: ['Angular Material', 'PrimeNG', 'Ant Design', 'Syncfusion'] },
+        { title: 'Back-end & database', icon: 'assets/icons/dotnet.svg', items: ['.NET', 'REST API development', 'SQL', 'SQL database management'] },
+        { title: 'DevOps & tools', icon: '', items: ['Git', 'GitLab', 'Azure DevOps', 'CI/CD pipelines', 'Jira', 'Microsoft Teams', 'Jasper Reports'] },
+        { title: 'Practices', icon: '', items: ['Agile / Scrum', 'Unit testing', 'Debugging', 'Performance monitoring', 'System design documentation', 'Requirements analysis'] },
+        { title: 'Leadership', icon: '', items: ['Team leadership', 'Project management', 'Mentoring', 'Stakeholder collaboration'] }
     ],
     projects: [
         {
             title: 'ERP Application: Finance & Trading',
+            category: 'Enterprise · Finance',
+            metric: '40%',
+            metricLabel: 'shorter database load times',
             description: 'A comprehensive Enterprise Resource Planning system for finance management, featuring real-time trading modules, detailed reporting, and automated reconciliation processes.',
             challenge: 'Standardizing heterogeneous trading procedures and account books across distributed business networks, which led to synchronization bottlenecks.',
             solution: 'Designed a centralized enterprise web platform in Angular 15, integrated with an asynchronous .NET queue processor and partitioned SQL Server database tables.',
@@ -103,6 +107,9 @@ export const RESUME_DATA = {
         },
         {
             title: 'Third-Party Integrations',
+            category: 'Platform · APIs',
+            metric: '99.9%',
+            metricLabel: 'uptime through partner outages',
             description: 'Seamless integration modules for Insurance, SIP, and PAN verification services, enhancing the core banking platform with external service capabilities.',
             challenge: 'Integrating external services like SIP, Insurance, and PAN verification APIs which had erratic latency spikes and inconsistent schemas.',
             solution: 'Architected a resilient gateway middleware with retry policies, token storage, and local cache policies.',
@@ -113,6 +120,9 @@ export const RESUME_DATA = {
         },
         {
             title: 'Customer Information System (CIS)',
+            category: 'Banking · KYC',
+            metric: '<150ms',
+            metricLabel: 'customer search',
             description: 'Centralized database and management interface for customer data, ensuring data integrity, quick retrieval, and compliant KYC processing.',
             challenge: 'Managing heavy customer databases and complying with KYC/AML audits without slowing down service desks.',
             solution: 'Engineered a centralized CIS portal in Angular, using optimized Entity Framework Core queries and lazy-loaded tab segments.',
@@ -123,6 +133,9 @@ export const RESUME_DATA = {
         },
         {
             title: 'Mutual Fund Back-Office',
+            category: 'Wealth · Dashboards',
+            metric: '2s',
+            metricLabel: 'to generate PDF audits',
             description: 'Back-office administration tool for mutual fund management, tracking portfolio performance, user investments, and regulatory compliance reports.',
             challenge: 'Visualizing volatile portfolio trends and generating audit reports with high latency and slow rendering cycles.',
             solution: 'Developed a reactive portfolio dashboard in Angular 13 with RxJS debounce operators and PrimeNG data matrices.',
@@ -133,6 +146,9 @@ export const RESUME_DATA = {
         },
         {
             title: 'Loan Against Shares (LAS)',
+            category: 'Lending · Risk',
+            metric: '−28%',
+            metricLabel: 'risk exposure',
             description: 'End-to-end management system for processing loans against securities, including collateral valuation, limit management, and loan disbursement.',
             challenge: 'Calculating loan limits against volatile equity securities dynamically without risking margin calls.',
             solution: 'Created a real-time limits calculator with SQL Stored Procedures and an automated trigger-based risk engine.',
@@ -143,6 +159,9 @@ export const RESUME_DATA = {
         },
         {
             title: 'iROHUB E-Learning Platform',
+            category: 'EdTech · Streaming',
+            metric: '5K+',
+            metricLabel: 'monthly certified learners',
             description: 'Interactive e-learning application delivering courses and assessments, featuring video streaming, progress tracking, and certification generation.',
             challenge: 'Optimizing bandwidth consumption and tracking module progressions for thousands of concurrent video streams.',
             solution: 'Built an e-learning container with Node.js streaming, custom video cache proxies, and MongoDB progress trackers.',
@@ -153,6 +172,6 @@ export const RESUME_DATA = {
         }
     ],
     certifications: [
-        'Angular', 'React Js', '.Net'
+        'Angular', 'React JS', '.NET'
     ]
 };
