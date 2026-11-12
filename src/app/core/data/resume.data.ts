@@ -8,7 +8,7 @@ export const RESUME_DATA = {
         years: 6,
         summary: 'Senior Software Engineer and Team Lead with 6+ years of experience building scalable front-end and back-end web applications with Angular (v2–21), .NET, TypeScript and SQL. Leads Agile development teams, translates business requirements into technical roadmaps, and delivers enterprise applications in finance, ERP and e-learning domains. Focused on performance optimization, clean code, and mentoring cross-functional teams to ship reliable, user-friendly software.',
         social: {
-            linkedin: 'https://www.linkedin.com/in/mohammed-shihabul-haque/',
+            linkedin: 'https://www.linkedin.com/in/mohammed-shihabul-haque-b21a331b2/',
             github: 'https://github.com/SHIHABULHAQUE'
         }
     },
